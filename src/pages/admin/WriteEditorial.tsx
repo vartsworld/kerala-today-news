@@ -37,10 +37,10 @@ async function ensureUniqueSlug(base: string): Promise<string> {
 const WriteEditorial = () => {
   const { toast } = useToast();
   const [title, setTitle] = useState("");
-  const [excerpt, setExcerpt] = useState("");
+  const [summary, setSummary] = useState("");
   const [content, setContent] = useState("");
   const [cover, setCover] = useState("");
-  const [status, setStatus] = useState<"draft" | "published">("draft");
+  const [isPublished, setIsPublished] = useState(false);
   const [saving, setSaving] = useState(false);
 
   const slug = useMemo(() => slugify(title), [title]);
@@ -59,12 +59,12 @@ const WriteEditorial = () => {
     const payload: any = {
       slug: finalSlug,
       title,
-      excerpt,
+      summary,
       content,
-      cover_image_url: cover || null,
-      status,
+      image_url: cover || null,
+      is_published: isPublished,
       author_id: user.id,
-      published_at: status === "published" ? new Date().toISOString() : null,
+      published_at: isPublished ? new Date().toISOString() : null,
     };
 
     const { error } = await supabase.from("editorials").insert(payload);
@@ -72,7 +72,7 @@ const WriteEditorial = () => {
     if (error) {
       toast({ title: "Save failed", description: error.message });
     } else {
-      const desc = status === "published" ? "Published" : "Draft created";
+      const desc = isPublished ? "Published" : "Draft created";
       toast({ title: "Editorial saved", description: finalSlug !== slug ? `${desc}. Slug adjusted to ${finalSlug}` : desc });
     }
   };
@@ -95,8 +95,8 @@ const WriteEditorial = () => {
           <Input value={slug} readOnly aria-readonly className="bg-muted" />
         </label>
         <label className="grid gap-2">
-          <span className="text-sm font-medium">Excerpt</span>
-          <Textarea value={excerpt} onChange={(e) => setExcerpt(e.target.value)} placeholder="Short summary" rows={3} />
+          <span className="text-sm font-medium">Summary</span>
+          <Textarea value={summary} onChange={(e) => setSummary(e.target.value)} placeholder="Short summary" rows={3} />
         </label>
         <label className="grid gap-2">
           <span className="text-sm font-medium">Cover image</span>
@@ -119,17 +119,17 @@ const WriteEditorial = () => {
         <div className="flex flex-col sm:flex-row gap-3 pt-4">
           <div className="flex gap-2">
             <Button 
-              variant={status === "draft" ? "secondary" : "outline"} 
+              variant={!isPublished ? "secondary" : "outline"} 
               type="button" 
-              onClick={() => setStatus("draft")}
+              onClick={() => setIsPublished(false)}
               className="flex-1 sm:flex-none"
             >
               Draft
             </Button>
             <Button 
-              variant={status === "published" ? "secondary" : "outline"} 
+              variant={isPublished ? "secondary" : "outline"} 
               type="button" 
-              onClick={() => setStatus("published")}
+              onClick={() => setIsPublished(true)}
               className="flex-1 sm:flex-none"
             >
               Publish
@@ -141,7 +141,7 @@ const WriteEditorial = () => {
               disabled={saving || !title || !content}
               className="w-full sm:w-auto"
             >
-              {saving ? "Saving…" : status === "published" ? "Save & Publish" : "Save draft"}
+              {saving ? "Saving…" : isPublished ? "Save & Publish" : "Save draft"}
             </Button>
           </div>
         </div>

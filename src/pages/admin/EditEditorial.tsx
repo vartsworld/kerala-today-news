@@ -42,10 +42,10 @@ const EditEditorial = () => {
   
   const [loading, setLoading] = useState(true);
   const [title, setTitle] = useState("");
-  const [excerpt, setExcerpt] = useState("");
+  const [summary, setSummary] = useState("");
   const [content, setContent] = useState("");
   const [cover, setCover] = useState("");
-  const [status, setStatus] = useState<"draft" | "published">("draft");
+  const [isPublished, setIsPublished] = useState(false);
   const [saving, setSaving] = useState(false);
 
   const slug = useMemo(() => slugify(title), [title]);
@@ -68,10 +68,10 @@ const EditEditorial = () => {
 
         if (data) {
           setTitle(data.title);
-          setExcerpt(data.excerpt || "");
+          setSummary(data.summary || "");
           setContent(data.content);
-          setCover(data.cover_image_url || "");
-          setStatus(data.status);
+          setCover(data.image_url || "");
+          setIsPublished(data.is_published);
         }
       } catch (error: any) {
         console.error("Failed to load editorial:", error);
@@ -103,11 +103,11 @@ const EditEditorial = () => {
       const payload: any = {
         slug: finalSlug,
         title,
-        excerpt,
+        summary,
         content,
-        cover_image_url: cover || null,
-        status,
-        published_at: status === "published" ? new Date().toISOString() : null,
+        image_url: cover || null,
+        is_published: isPublished,
+        published_at: isPublished ? new Date().toISOString() : null,
       };
 
       const { error } = await supabase
@@ -117,7 +117,7 @@ const EditEditorial = () => {
 
       if (error) throw error;
 
-      const desc = status === "published" ? "Updated and published" : "Draft updated";
+      const desc = isPublished ? "Updated and published" : "Draft updated";
       toast({ 
         title: "Editorial saved", 
         description: finalSlug !== slug ? `${desc}. Slug adjusted to ${finalSlug}` : desc 
@@ -146,7 +146,7 @@ const EditEditorial = () => {
   return (
     <main className="container mx-auto max-w-3xl px-4 py-6 md:py-10">
       <SEO 
-        title="Edit Editorial – Achayans Media" 
+        title="Edit Editorial – Kerala Today News" 
         description="Edit editorial content" 
         canonical="/admin/edit" 
         type="article" 
@@ -173,10 +173,10 @@ const EditEditorial = () => {
         </label>
         
         <label className="grid gap-2">
-          <span className="text-sm font-medium">Excerpt</span>
+          <span className="text-sm font-medium">Summary</span>
           <Textarea 
-            value={excerpt} 
-            onChange={(e) => setExcerpt(e.target.value)} 
+            value={summary} 
+            onChange={(e) => setSummary(e.target.value)} 
             placeholder="Short summary" 
             rows={3}
           />
@@ -209,17 +209,17 @@ const EditEditorial = () => {
         <div className="flex flex-col sm:flex-row gap-3 pt-4">
           <div className="flex gap-2">
             <Button 
-              variant={status === "draft" ? "secondary" : "outline"} 
+              variant={!isPublished ? "secondary" : "outline"} 
               type="button" 
-              onClick={() => setStatus("draft")}
+              onClick={() => setIsPublished(false)}
               className="flex-1 sm:flex-none"
             >
               Draft
             </Button>
             <Button 
-              variant={status === "published" ? "secondary" : "outline"} 
+              variant={isPublished ? "secondary" : "outline"} 
               type="button" 
-              onClick={() => setStatus("published")}
+              onClick={() => setIsPublished(true)}
               className="flex-1 sm:flex-none"
             >
               Publish
@@ -240,7 +240,7 @@ const EditEditorial = () => {
               disabled={saving || !title || !content}
               className="flex-1 sm:flex-none"
             >
-              {saving ? "Saving…" : status === "published" ? "Update & Publish" : "Update Draft"}
+              {saving ? "Saving…" : isPublished ? "Update & Publish" : "Update Draft"}
             </Button>
           </div>
         </div>

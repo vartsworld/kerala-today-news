@@ -14,7 +14,7 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 interface EditorialRow {
   id: string;
   title: string;
-  status: string;
+  is_published: boolean;
   updated_at: string;
   slug: string;
 }
@@ -25,8 +25,9 @@ const RecentEditorials = () => {
   const { toast } = useToast();
 
   const loadEditorials = async () => {
-    const { data, error } = await (supabase.from as any)("editorials")
-      .select("id,title,status,updated_at,slug")
+    const { data, error } = await supabase
+      .from("editorials")
+      .select("id,title,is_published,updated_at,slug")
       .order("updated_at", { ascending: false })
       .limit(5);
     if (error) {
@@ -97,8 +98,8 @@ const RecentEditorials = () => {
                         </Link>
                       </TableCell>
                       <TableCell>
-                        <Badge variant={r.status === "published" ? "default" : "secondary"}>
-                          {r.status}
+                        <Badge variant={r.is_published ? "default" : "secondary"}>
+                          {r.is_published ? "published" : "draft"}
                         </Badge>
                       </TableCell>
                       <TableCell className="text-right text-muted-foreground">
@@ -162,8 +163,8 @@ const RecentEditorials = () => {
                         <h3 className="font-medium text-sm leading-tight mb-2 pr-2">{r.title}</h3>
                       </Link>
                       <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                        <Badge variant={r.status === "published" ? "default" : "secondary"} className="text-xs">
-                          {r.status}
+                        <Badge variant={r.is_published ? "default" : "secondary"} className="text-xs">
+                          {r.is_published ? "published" : "draft"}
                         </Badge>
                         <span>{format(new Date(r.updated_at), "MMM d, yyyy")}</span>
                       </div>
