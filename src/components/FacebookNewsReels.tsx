@@ -81,7 +81,7 @@ const FacebookNewsReels = () => {
   if (error || !items || items.length === 0) return null;
 
   return (
-    <section id="reels" className="container mx-auto py-12">
+    <section id="reels" className="container mx-auto px-4 py-8 sm:py-12">
       <header className="mb-4 sm:mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0">
         <div>
           <h2 className="text-xl sm:text-2xl md:text-3xl font-bold">News Reels</h2>

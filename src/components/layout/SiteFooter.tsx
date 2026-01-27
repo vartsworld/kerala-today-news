@@ -3,8 +3,8 @@ import { Phone, Mail, MessageCircle, ExternalLink } from "lucide-react";
 
 const SiteFooter = () => {
   return (
-    <footer className="mt-16 border-t bg-secondary/30">
-      <div className="container mx-auto py-12">
+    <footer className="mt-12 sm:mt-16 border-t bg-secondary/30 safe-area-bottom">
+      <div className="container mx-auto px-4 py-8 sm:py-12">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand Section */}
           <div className="lg:col-span-2">

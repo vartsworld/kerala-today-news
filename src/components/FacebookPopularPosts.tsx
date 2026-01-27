@@ -103,10 +103,10 @@ const FacebookPopularPosts = () => {
     768: 2,
     480: 1
   };
-  return <section className="container mx-auto py-12">
-      <header className="mb-6">
-        <h2 className="text-2xl md:text-3xl font-bold">All News</h2>
-        <p className="text-muted-foreground">Latest updates from Achayans Media</p>
+  return <section className="container mx-auto px-4 py-8 sm:py-12">
+      <header className="mb-4 sm:mb-6">
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold">All News</h2>
+        <p className="text-sm sm:text-base text-muted-foreground">Latest updates from Achayans Media</p>
       </header>
       
       <Masonry breakpointCols={breakpointColumnsObj} className="flex w-auto -ml-4" columnClassName="pl-4 bg-clip-padding">
