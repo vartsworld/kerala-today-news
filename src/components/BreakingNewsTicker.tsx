@@ -20,13 +20,13 @@ const BreakingNewsTicker = () => {
   ];
 
   return (
-    <div className="bg-destructive text-destructive-foreground py-2 overflow-hidden relative border-y">
-      <div className="container mx-auto flex items-center gap-4">
-        <div className="flex items-center gap-2 shrink-0">
-          <Badge variant="secondary" className="bg-background text-foreground font-bold px-3 py-1 relative overflow-hidden animate-shine">
+    <div className="bg-destructive text-destructive-foreground py-1.5 sm:py-2 overflow-hidden relative border-y">
+      <div className="container mx-auto px-4 flex items-center gap-2 sm:gap-4">
+        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+          <Badge variant="secondary" className="bg-background text-foreground font-bold px-2 sm:px-3 py-0.5 sm:py-1 text-xs sm:text-sm relative overflow-hidden animate-shine">
             BREAKING
           </Badge>
-          <div className="flex items-center gap-1 text-xs">
+          <div className="hidden sm:flex items-center gap-1 text-xs">
             <Clock className="h-3 w-3" />
             <span>{currentTime.toLocaleTimeString('en-IN', { 
               hour12: false, 
@@ -40,13 +40,13 @@ const BreakingNewsTicker = () => {
           <div className="animate-scroll whitespace-nowrap">
             <span className="inline-block">
               {breakingNews.map((news, index) => (
-                <span key={index} className="mx-8 text-sm font-medium">
+                <span key={index} className="mx-4 sm:mx-8 text-xs sm:text-sm font-medium">
                   • {news}
                 </span>
               ))}
               {/* Duplicate for seamless loop */}
               {breakingNews.map((news, index) => (
-                <span key={`duplicate-${index}`} className="mx-8 text-sm font-medium">
+                <span key={`duplicate-${index}`} className="mx-4 sm:mx-8 text-xs sm:text-sm font-medium">
                   • {news}
                 </span>
               ))}

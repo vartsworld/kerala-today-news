@@ -146,7 +146,20 @@
 
 @layer base {
   * { @apply border-border; }
-  body { @apply bg-background text-foreground; }
+  body { @apply bg-background text-foreground antialiased; }
+  
+  /* Improved touch targets for mobile */
+  button, a { @apply touch-manipulation; }
+  
+  /* Better focus states for accessibility */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-ring;
+  }
+}
+
+/* Responsive container padding */
+.container {
+  @apply px-4 sm:px-6 lg:px-8;
 }
 
 @keyframes scroll {
@@ -167,6 +180,17 @@
   }
 }
 
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .animate-scroll {
   animation: scroll 25s linear infinite;
 }
@@ -180,4 +204,15 @@
   );
   background-size: 200% 100%;
   animation: shine 2s infinite;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out forwards;
+}
+
+/* Safe area insets for mobile devices with notches */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
 }
