@@ -24,18 +24,18 @@ const AdminDashboard = () => {
   useEffect(() => {
     const loadCounts = async () => {
       try {
-        const totalQ = (supabase.from as any)("editorials").select("*", {
+        const totalQ = supabase.from("editorials").select("*", {
           count: "exact",
           head: true
         });
-        const draftsQ = (supabase.from as any)("editorials").select("*", {
+        const draftsQ = supabase.from("editorials").select("*", {
           count: "exact",
           head: true
-        }).eq("status", "draft");
-        const publishedQ = (supabase.from as any)("editorials").select("*", {
+        }).eq("is_published", false);
+        const publishedQ = supabase.from("editorials").select("*", {
           count: "exact",
           head: true
-        }).eq("status", "published");
+        }).eq("is_published", true);
         const [{
           count: t
         }, {
@@ -59,7 +59,7 @@ const AdminDashboard = () => {
     window.location.href = "/";
   };
   return <main className="container mx-auto px-4 py-6 md:py-10 animate-fade-in">
-      <SEO title="Admin Dashboard – Achayans Media" description="Manage editorials and content" canonical="/admin" />
+      <SEO title="Admin Dashboard – Kerala Today News" description="Manage editorials and content" canonical="/admin" />
 
       <header className="mb-6">
         <h1 className="text-2xl md:text-3xl font-bold">Dashboard</h1>

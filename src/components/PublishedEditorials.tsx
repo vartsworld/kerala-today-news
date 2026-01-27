@@ -5,11 +5,11 @@ import NewsCard from "@/components/NewsCard";
 interface Editorial {
   id: string;
   title: string;
-  excerpt: string;
+  summary: string | null;
   slug: string;
-  cover_image_url: string;
-  published_at: string;
-  author_id: string;
+  image_url: string | null;
+  published_at: string | null;
+  author_id: string | null;
 }
 
 interface PublishedEditorialsProps {
@@ -32,8 +32,8 @@ const PublishedEditorials = ({
       try {
         const { data, error } = await supabase
           .from('editorials')
-          .select('id, title, excerpt, slug, cover_image_url, published_at, author_id')
-          .eq('status', 'published')
+          .select('id, title, summary, slug, image_url, published_at, author_id')
+          .eq('is_published', true)
           .order('published_at', { ascending: false })
           .limit(limit);
 
@@ -105,10 +105,10 @@ const PublishedEditorials = ({
           <NewsCard
             key={editorial.id}
             title={editorial.title}
-            excerpt={editorial.excerpt || 'Read this editorial piece...'}
+            excerpt={editorial.summary || 'Read this editorial piece...'}
             href={`/editorial/${editorial.slug}`}
-            image={editorial.cover_image_url}
-            date={editorial.published_at}
+            image={editorial.image_url || undefined}
+            date={editorial.published_at || undefined}
             source="Editorial"
           />
         ))}

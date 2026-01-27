@@ -4,9 +4,9 @@ import { supabase } from "@/integrations/supabase/client";
 interface Editorial {
   id: string;
   title: string;
-  excerpt: string;
+  summary: string | null;
   slug: string;
-  published_at: string;
+  published_at: string | null;
 }
 
 const LatestEditorial = () => {
@@ -18,8 +18,8 @@ const LatestEditorial = () => {
       try {
         const { data, error } = await supabase
           .from('editorials')
-          .select('id, title, excerpt, slug, published_at')
-          .eq('status', 'published')
+          .select('id, title, summary, slug, published_at')
+          .eq('is_published', true)
           .order('published_at', { ascending: false })
           .limit(1)
           .maybeSingle();
@@ -60,7 +60,7 @@ const LatestEditorial = () => {
     <a href={`/editorial/${editorial.slug}`} className="block rounded-lg border bg-card p-3 hover-scale">
       <p className="text-sm font-medium leading-snug">{editorial.title}</p>
       <span className="text-xs text-muted-foreground">
-        Editorial • {new Date(editorial.published_at).toLocaleDateString()}
+        Editorial • {editorial.published_at ? new Date(editorial.published_at).toLocaleDateString() : 'Draft'}
       </span>
     </a>
   );

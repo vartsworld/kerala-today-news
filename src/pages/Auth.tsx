@@ -6,9 +6,8 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
-// Admin credentials
-const ADMIN_EMAIL = "keralatoday@vaw.tech";
-const ADMIN_PASSWORD = "keralatoday123*";
+// Admin credentials are stored in Lovable Cloud backend
+// Email: keralatoday@vaw.tech
 
 const Auth = () => {
   const { toast } = useToast();
