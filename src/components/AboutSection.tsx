@@ -5,11 +5,11 @@ const AboutSection = () => {
     <section id="about" className="container mx-auto py-12 md:py-16">
       <div className="grid gap-6 md:grid-cols-3">
         <article className="md:col-span-2 rounded-lg border bg-card text-card-foreground p-6 shadow-sm">
-          <h2 className="text-2xl font-bold tracking-tight">About Achayans Media</h2>
+          <h2 className="text-2xl font-bold tracking-tight">About Kerala Today News</h2>
           <Separator className="my-4" />
           <p className="text-muted-foreground">
-            Achayans Media brings timely news, field reports, and community stories with integrity and clarity.
-            We are proud to be a Journalist & Media Associate Member, committed to responsible journalism.
+            Kerala Today News brings timely news, field reports, and community stories with integrity and clarity.
+            We are committed to responsible journalism and keeping you informed with the latest happenings.
           </p>
         </article>
         <aside className="rounded-lg border bg-muted/30 p-6">
@@ -22,4 +22,5 @@ const AboutSection = () => {
     </section>
   );
 };
+
 export default AboutSection;

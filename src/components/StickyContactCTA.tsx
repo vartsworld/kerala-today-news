@@ -11,7 +11,7 @@ const StickyContactCTA = () => {
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center justify-center h-12 w-12 rounded-full bg-primary text-primary-foreground shadow-lg hover-scale focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-          aria-label="WhatsApp Achayans Media"
+          aria-label="WhatsApp Kerala Today News"
         >
           <MessageCircle className="size-6" />
         </a>
@@ -20,7 +20,7 @@ const StickyContactCTA = () => {
         <a
           href={`tel:${CONTACT.phoneTel}`}
           className="inline-flex items-center justify-center h-12 w-12 rounded-full bg-secondary text-foreground border shadow hover-scale focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-          aria-label="Call Achayans Media"
+          aria-label="Call Kerala Today News"
         >
           <Phone className="size-6" />
         </a>

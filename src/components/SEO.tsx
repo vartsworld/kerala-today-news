@@ -17,9 +17,9 @@ export const SEO = ({
   type = "website",
   structuredData,
 }: SEOProps) => {
-  const siteName = "Achayans Media";
-  const baseUrl = "https://achayansmedia.com";
-  const defaultImage = `${baseUrl}/lovable-uploads/685a77f1-54e3-4b5c-9510-e9a4eee98537.png`;
+  const siteName = "Kerala Today News";
+  const baseUrl = "https://keralatodaynews.com";
+  const defaultImage = `${baseUrl}/lovable-uploads/kerala-today-logo.png`;
   const seoImage = image || defaultImage;
   const fullCanonical = canonical ? `${baseUrl}${canonical}` : baseUrl;
   
@@ -40,8 +40,8 @@ export const SEO = ({
       <meta property="og:locale" content="en_US" />
 
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content="@AchayansMedia" />
-      <meta name="twitter:creator" content="@AchayansMedia" />
+      <meta name="twitter:site" content="@KeralaTodayNews" />
+      <meta name="twitter:creator" content="@KeralaTodayNews" />
       <meta name="twitter:title" content={title} />
       {description && <meta name="twitter:description" content={description} />}
       <meta name="twitter:image" content={seoImage} />

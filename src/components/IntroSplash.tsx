@@ -1,7 +1,6 @@
-
 import { useEffect, useState } from "react";
 
-const LOGO_URL = "/lovable-uploads/c2187b87-9b14-4702-94e6-b6f488f0d87e.png";
+const LOGO_URL = "/lovable-uploads/kerala-today-logo.png";
 
 const IntroSplash = () => {
   const [visible, setVisible] = useState(false);
@@ -12,13 +11,13 @@ const IntroSplash = () => {
     if (window.location.pathname !== "/") return;
 
     // Check if intro has already been shown in this session
-    const hasShownIntro = sessionStorage.getItem('achayans-intro-shown');
+    const hasShownIntro = sessionStorage.getItem('kerala-today-intro-shown');
     if (hasShownIntro) {
       return;
     }
 
     // Mark immediately to avoid StrictMode double-invocation flicker
-    sessionStorage.setItem('achayans-intro-shown', 'true');
+    sessionStorage.setItem('kerala-today-intro-shown', 'true');
 
     // Show the intro for first time visitors
     setVisible(true);
@@ -47,17 +46,17 @@ const IntroSplash = () => {
         <div className="relative">
           <img
             src={LOGO_URL}
-            alt="Achayans Media logo"
-            width={160}
-            height={160}
-            className="rounded-full shadow-md will-change-transform animate-scale-in"
+            alt="Kerala Today News logo"
+            width={200}
+            height={200}
+            className="rounded shadow-md will-change-transform animate-scale-in"
           />
         </div>
-        <h1 className="text-2xl font-extrabold tracking-tight">Achayans Media</h1>
+        <h1 className="text-2xl font-extrabold tracking-tight">Kerala Today News</h1>
         <p className="text-sm text-muted-foreground">News. Editorials. Updates.</p>
         <div className="mt-1 w-[280px] overflow-hidden rounded-full border bg-card text-card-foreground">
           <div className="whitespace-nowrap animate-ticker px-3 py-1 text-xs">
-            Breaking • Achayans Media • Journalist & Media Associate Member
+            Breaking • Kerala Today News • Your Daily News Source
           </div>
         </div>
       </div>

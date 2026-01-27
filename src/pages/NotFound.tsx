@@ -15,8 +15,8 @@ const NotFound = () => {
   return (
     <>
       <SEO
-        title="Page Not Found — Achayans Media"
-        description="The page you're looking for doesn't exist. Return to Achayans Media homepage for breaking news and editorials."
+        title="Page Not Found — Kerala Today News"
+        description="The page you're looking for doesn't exist. Return to Kerala Today News homepage for breaking news and editorials."
         canonical="/404"
       />
       <div className="min-h-screen flex items-center justify-center bg-background text-foreground">

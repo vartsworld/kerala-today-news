@@ -79,7 +79,7 @@ const WriteEditorial = () => {
 
   return (
     <main className="container mx-auto max-w-3xl px-4 py-6 md:py-10">
-      <SEO title="Write Editorial – Achayans Media" description="Create and publish editorials" canonical="/admin/write" type="article" />
+      <SEO title="Write Editorial – Kerala Today News" description="Create and publish editorials" canonical="/admin/write" type="article" />
       <header className="mb-6">
         <h1 className="text-2xl md:text-3xl font-bold">Write editorial</h1>
         <p className="text-muted-foreground text-sm md:text-base">Compose your piece and publish when ready.</p>

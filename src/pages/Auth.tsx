@@ -6,6 +6,10 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
+// Admin credentials
+const ADMIN_EMAIL = "keralatoday@vaw.tech";
+const ADMIN_PASSWORD = "keralatoday123*";
+
 const Auth = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -85,8 +89,8 @@ const Auth = () => {
   return (
     <main className="container mx-auto max-w-md py-10">
       <SEO
-        title={`${mode === "login" ? "Login" : "Sign up"} – Achayans Media Admin`}
-        description="Admin login for Achayans Media"
+        title={`${mode === "login" ? "Login" : "Sign up"} – Kerala Today News Admin`}
+        description="Admin login for Kerala Today News"
         canonical="/auth"
       />
       <header className="mb-6 text-center">
