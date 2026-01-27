@@ -73,7 +73,7 @@ const FacebookSettings = () => {
 
   return (
     <main className="container mx-auto py-10">
-      <SEO title="Facebook Settings – Achayans Media" description="Connect Facebook Page manually" canonical="/admin/facebook" />
+      <SEO title="Facebook Settings – Kerala Today News" description="Connect Facebook Page manually" canonical="/admin/facebook" />
       <header className="mb-6">
         <h1 className="text-3xl font-bold">Connect Facebook Page (Manual)</h1>
         <p className="text-muted-foreground">Paste your Facebook Page ID and a long-lived Page Access Token.</p>
@@ -88,13 +88,13 @@ const FacebookSettings = () => {
 
           <div className="space-y-2">
             <Label htmlFor="page_name">Page Name (optional)</Label>
-            <Input id="page_name" value={pageName} onChange={(e) => setPageName(e.target.value)} placeholder="e.g. Achayans Media" />
+            <Input id="page_name" value={pageName} onChange={(e) => setPageName(e.target.value)} placeholder="e.g. Kerala Today News" />
           </div>
 
           <div className="space-y-2">
             <Label htmlFor="access_token">Long-lived Page Access Token</Label>
             <Input id="access_token" value={accessToken} onChange={(e) => setAccessToken(e.target.value)} placeholder="EAAG..." />
-            <p className="text-sm text-muted-foreground">We store this securely in Supabase. Only admins can read or modify it.</p>
+            <p className="text-sm text-muted-foreground">We store this securely. Only admins can read or modify it.</p>
           </div>
 
           <div className="flex gap-3">

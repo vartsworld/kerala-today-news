@@ -9,9 +9,9 @@ const SiteFooter = () => {
           {/* Brand Section */}
           <div className="lg:col-span-2">
             <div className="mb-4">
-              <h2 className="text-2xl font-bold text-primary">Achayans Media</h2>
+              <h2 className="text-2xl font-bold text-primary">Kerala Today News</h2>
               <p className="text-xs uppercase tracking-wide text-muted-foreground mt-1 font-medium">
-                Journalist & Media Associate Member
+                Your Daily News Source
               </p>
             </div>
             <p className="text-sm text-muted-foreground mb-4 max-w-md leading-relaxed">
@@ -93,7 +93,7 @@ const SiteFooter = () => {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="text-center md:text-left">
               <p className="text-sm text-muted-foreground">
-                &copy; {new Date().getFullYear()} Achayans Media. All rights reserved.
+                &copy; {new Date().getFullYear()} Kerala Today News. All rights reserved.
               </p>
             </div>
             

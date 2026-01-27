@@ -15,4 +15,4 @@ Allow: /
 Disallow: /admin/
 Disallow: /auth
 
-Sitemap: https://achayansmedia.com/sitemap.xml
+Sitemap: https://keralatodaynews.com/sitemap.xml

@@ -5,20 +5,20 @@ const Editorial = () => {
   return (
     <main className="container mx-auto py-10">
       <SEO
-        title="Editorial — Achayans Media"
-        description="Opinion and analysis from the Achayans Media editorial desk. Expert commentary on current events, politics, and society from our experienced editorial team."
+        title="Editorial — Kerala Today News"
+        description="Opinion and analysis from the Kerala Today News editorial desk. Expert commentary on current events, politics, and society from our experienced editorial team."
         canonical="/editorial"
         type="website"
         structuredData={{
           "@context": "https://schema.org",
           "@type": "CollectionPage",
-          "name": "Editorial Section - Achayans Media",
-          "description": "Editorial opinions and analysis from Achayans Media",
-          "url": "https://achayansmedia.com/editorial",
+          "name": "Editorial Section - Kerala Today News",
+          "description": "Editorial opinions and analysis from Kerala Today News",
+          "url": "https://keralatodaynews.com/editorial",
           "isPartOf": {
             "@type": "WebSite",
-            "name": "Achayans Media",
-            "url": "https://achayansmedia.com"
+            "name": "Kerala Today News",
+            "url": "https://keralatodaynews.com"
           }
         }}
       />
