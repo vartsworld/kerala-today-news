@@ -142,7 +142,7 @@ const Article = () => {
     excerpt: post.message?.slice(0, 150) || '',
     image: post.attachments?.find(a => a.thumbnail_url || a.url)?.thumbnail_url || 
            post.attachments?.find(a => a.thumbnail_url || a.url)?.url || 
-           '/lovable-uploads/685a77f1-54e3-4b5c-9510-e9a4eee98537.png',
+           '/lovable-uploads/kerala-today-logo.png',
     date: post.created_time,
     href: `/article/facebook-${post.id}`,
     source: 'Facebook'
@@ -154,7 +154,7 @@ const Article = () => {
       
       <main className="min-h-screen bg-background">
         <SEO
-          title={`${articleTitle} — Achayans Media`}
+          title={`${articleTitle} — Kerala Today`}
           description={articleContent.slice(0, 160)}
           canonical={`/article/${slug}`}
           type="article"
@@ -167,23 +167,23 @@ const Article = () => {
             datePublished: article.created_time,
             author: {
               "@type": "Organization",
-              name: "Achayans Media",
-              url: "https://achayansmedia.com"
+              name: "Kerala Today",
+              url: "https://keralatoday.news"
             },
             publisher: {
               "@type": "Organization",
-              name: "Achayans Media",
-              url: "https://achayansmedia.com",
+              name: "Kerala Today",
+              url: "https://keralatoday.news",
               logo: { 
                 "@type": "ImageObject", 
-                url: "https://achayansmedia.com/lovable-uploads/685a77f1-54e3-4b5c-9510-e9a4eee98537.png",
+                url: "https://keralatoday.news/lovable-uploads/kerala-today-logo.png",
                 width: 400,
                 height: 400
               }
             },
             mainEntityOfPage: {
               "@type": "WebPage",
-              "@id": `https://achayansmedia.com/article/${slug}`
+              "@id": `https://keralatoday.news/article/${slug}`
             }
           }}
         />
@@ -231,12 +231,12 @@ const Article = () => {
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 py-4 border-y">
                   <div className="flex items-center space-x-3">
                     <img 
-                      src="/lovable-uploads/685a77f1-54e3-4b5c-9510-e9a4eee98537.png" 
-                      alt="Achayans Media"
+                      src="/lovable-uploads/kerala-today-logo.png" 
+                      alt="Kerala Today"
                       className="w-10 h-10 rounded-full object-cover"
                     />
                     <div>
-                      <p className="font-medium text-foreground">Achayans Media</p>
+                      <p className="font-medium text-foreground">Kerala Today</p>
                       <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                         <time dateTime={article.created_time}>
                           {new Date(article.created_time).toLocaleDateString('en-US', {
@@ -257,7 +257,7 @@ const Article = () => {
               <div className="mb-8 flex justify-center">
                 <SocialShareButtons 
                   title={articleTitle}
-                  url={`https://achayansmedia.com/article/${slug}`}
+                  url={`https://keralatoday.news/article/${slug}`}
                 />
               </div>
 
