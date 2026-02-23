@@ -34,6 +34,7 @@ const FacebookLatestPosts = () => {
       <section className="lg:col-span-3" aria-label="Fresh stories">
         <h2 className="text-xl font-bold mb-3">Fresh stories</h2>
         <p className="text-sm text-muted-foreground">Unable to load latest posts</p>
+        <p className="text-[10px] text-muted-foreground/50 mt-1">Error: {error}</p>
       </section>
     );
   }
@@ -63,7 +64,7 @@ const FacebookLatestPosts = () => {
           const slug = `facebook-${item.id}`;
           return (
             <li key={item.id}>
-              <Link 
+              <Link
                 to={`/article/${slug}`}
                 className="story-link leading-snug hover:text-primary transition-colors text-sm md:text-base"
               >
