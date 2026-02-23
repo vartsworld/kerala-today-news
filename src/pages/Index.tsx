@@ -26,10 +26,10 @@ const Index = () => {
 
   return (
     <main>
-      <SEO 
-        title="Kerala Today News — Breaking News & Editorial Excellence" 
-        description="Your trusted source for breaking news, in-depth editorials, and comprehensive media coverage. Stay informed with Kerala Today News's latest updates and expert analysis." 
-        canonical="/" 
+      <SEO
+        title="Kerala Today News — Breaking News & Editorial Excellence"
+        description="Your trusted source for breaking news, in-depth editorials, and comprehensive media coverage. Stay informed with Kerala Today News's latest updates and expert analysis."
+        canonical="/"
         structuredData={{
           "@context": "https://schema.org",
           "@type": "NewsMediaOrganization",
@@ -39,18 +39,18 @@ const Index = () => {
           "sameAs": ["https://facebook.com/KeralaTodayNews"],
           "description": "Breaking news, in-depth editorials, and comprehensive media coverage from Kerala Today News.",
           "foundingDate": "2020"
-        }} 
-      />
+        }} />
+
 
       <section id="hero" aria-label="Hero banner" className="relative">
         {/* Hero image - responsive aspect ratio for different screens */}
         <div className="relative w-full aspect-[4/3] sm:aspect-[16/9] md:aspect-[21/9] lg:aspect-[21/8] overflow-hidden">
-          <img 
-            src="/lovable-uploads/kerala-today-hero.png" 
-            alt="Kerala Today News - Your Daily News Source" 
-            loading="eager" 
-            className="absolute inset-0 h-full w-full object-cover object-center" 
-          />
+          <img
+            src="/lovable-uploads/kerala-today-hero.png"
+            alt="Kerala Today News - Your Daily News Source"
+            loading="eager"
+            className="absolute inset-0 h-full w-full object-cover object-center" />
+
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
           
           {/* Hero content overlay for larger screens */}
@@ -59,8 +59,8 @@ const Index = () => {
               <h1 className="text-3xl lg:text-4xl font-bold text-foreground drop-shadow-lg">
                 Kerala Today News
               </h1>
-              <p className="text-sm lg:text-base text-muted-foreground drop-shadow-md mt-1">
-                Your Daily News Source
+              <p className="text-sm lg:text-base text-muted-foreground drop-shadow-md mt-1">Your Daily News Source
+
               </p>
             </div>
           </div>
@@ -111,16 +111,16 @@ const Index = () => {
       <FacebookFeedSection />
 
       <section className="container mx-auto px-4 py-8 sm:py-12">
-        <PublishedEditorials 
-          limit={4} 
+        <PublishedEditorials
+          limit={4}
           showTitle={true}
-          gridCols="grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
-        />
+          gridCols="grid-cols-1 sm:grid-cols-2 lg:grid-cols-4" />
+
       </section>
 
       <AboutSection />
-    </main>
-  );
+    </main>);
+
 };
 
 export default Index;
