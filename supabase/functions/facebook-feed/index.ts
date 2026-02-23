@@ -7,7 +7,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type, x-supabase-client-platform, prefer',
 };
 
 interface NormalizedAttachment {
@@ -105,7 +105,7 @@ Deno.serve(async (req) => {
     const url = new URL(`https://graph.facebook.com/v19.0/${pageId}/posts`);
     url.searchParams.set('fields', fields);
     url.searchParams.set('access_token', accessToken);
-    
+
     // For pagination, we need to fetch more posts and skip the offset amount
     // Facebook API doesn't support offset directly, so we fetch limit + offset
     const totalLimit = Math.min(limit + offset, 100); // Facebook has a max limit of 100
