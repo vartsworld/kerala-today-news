@@ -31,6 +31,9 @@ const FacebookFeaturedPost = () => {
       if (error) {
         console.error(error);
         setError(error.message);
+      } else if (data?.error) {
+        console.error("Facebook featured error:", data.message);
+        setError(data.message || data.error);
       } else {
         // Find the first post with an image for featured display
         const postsWithImages = (data?.data ?? []).filter((item: FeedItem) => item.attachments && item.attachments.some(att => att.thumbnail_url || att.url));

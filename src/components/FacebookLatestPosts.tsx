@@ -22,6 +22,9 @@ const FacebookLatestPosts = () => {
       if (error) {
         console.error(error);
         setError(error.message);
+      } else if (data?.error) {
+        console.error("Facebook feed error:", data.message);
+        setError(data.message || data.error);
       } else {
         setItems(data?.data ?? []);
       }

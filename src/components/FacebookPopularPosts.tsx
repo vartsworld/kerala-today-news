@@ -44,7 +44,15 @@ const FacebookPopularPosts = () => {
         setError(error.message);
         return;
       }
-      const newItems = data?.data ?? [];
+
+      const payload = data as any;
+      if (payload?.error) {
+        console.error("Facebook popular error:", payload.message);
+        setError(payload.message || payload.error);
+        return;
+      }
+
+      const newItems = payload?.data ?? [];
 
       // Filter out duplicates based on post ID
       const uniqueNewItems = newItems.filter((item: FeedItem) => !loadedIds.has(item.id));

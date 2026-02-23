@@ -18,7 +18,7 @@ interface FeedItem {
 const FacebookFeedSection = () => {
   const [items, setItems] = useState<FeedItem[] | null>(null);
   const [error, setError] = useState<string | null>(null);
-  
+
   useEffect(() => {
     let mounted = true;
     (async () => {
@@ -29,6 +29,9 @@ const FacebookFeedSection = () => {
       if (error) {
         console.error(error);
         setError(error.message);
+      } else if (data?.error) {
+        console.error("Facebook feed section error:", data.message);
+        setError(data.message || data.error);
       } else {
         setItems(data?.data ?? []);
       }
