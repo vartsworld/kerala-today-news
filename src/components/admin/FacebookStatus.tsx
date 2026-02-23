@@ -25,7 +25,7 @@ const FacebookStatus = () => {
 
   useEffect(() => {
     const load = async () => {
-      const { data, error } = await (supabase.from as any)("facebook_settings")
+      const { data, error } = await supabase.from("facebook_settings")
         .select("page_name,page_id,updated_at")
         .limit(1)
         .maybeSingle();
