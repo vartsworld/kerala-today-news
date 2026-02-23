@@ -16,7 +16,7 @@ const FacebookSettings = () => {
 
   useEffect(() => {
     const load = async () => {
-      const { data, error } = await (supabase.from as any)("facebook_settings")
+      const { data, error } = await supabase.from("facebook_settings")
         .select("id,page_id,access_token,page_name")
         .limit(1)
         .maybeSingle();
@@ -49,13 +49,13 @@ const FacebookSettings = () => {
       }
 
       if (id) {
-        const { error } = await (supabase.from as any)("facebook_settings")
-          .update({ page_id: pageId, access_token: accessToken, page_name: pageName || null })
+        const { error } = await supabase.from("facebook_settings")
+          .update({ page_id: pageId, access_token: accessToken, page_name: pageName || null, updated_by: userId })
           .eq("id", id);
         if (error) throw error;
       } else {
-        const { data, error } = await (supabase.from as any)("facebook_settings")
-          .insert({ page_id: pageId, access_token: accessToken, page_name: pageName || null, created_by: userId })
+        const { data, error } = await supabase.from("facebook_settings")
+          .insert({ page_id: pageId, access_token: accessToken, page_name: pageName || null, updated_by: userId } as any)
           .select("id")
           .single();
         if (error) throw error;

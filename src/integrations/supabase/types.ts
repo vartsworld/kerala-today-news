@@ -71,22 +71,28 @@ export type Database = {
       facebook_settings: {
         Row: {
           access_token: string | null
+          created_by: string | null
           id: string
           page_id: string | null
+          page_name: string | null
           updated_at: string
           updated_by: string | null
         }
         Insert: {
           access_token?: string | null
+          created_by?: string | null
           id?: string
           page_id?: string | null
+          page_name?: string | null
           updated_at?: string
           updated_by?: string | null
         }
         Update: {
           access_token?: string | null
+          created_by?: string | null
           id?: string
           page_id?: string | null
+          page_name?: string | null
           updated_at?: string
           updated_by?: string | null
         }
