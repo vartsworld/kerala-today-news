@@ -51,7 +51,7 @@ const Index = () => {
               src="/lovable-uploads/kerala-today-hero.png"
               alt="Kerala Today News - Your Daily News Source"
               loading="eager"
-              className="absolute inset-0 h-full w-full object-contain sm:object-cover object-center"
+              className="absolute inset-0 h-full w-full object-cover object-center"
             />
           </picture>
 
