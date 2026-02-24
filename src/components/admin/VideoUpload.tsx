@@ -3,7 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import { Upload, X, Video } from "lucide-react";
+import { Upload, X, Video, Loader2, Play } from "lucide-react";
+import { Progress } from "@/components/ui/progress";
 
 interface VideoUploadProps {
     onVideoUploaded: (url: string) => void;
@@ -13,42 +14,44 @@ interface VideoUploadProps {
 const VideoUpload = ({ onVideoUploaded, currentVideo }: VideoUploadProps) => {
     const { toast } = useToast();
     const [uploading, setUploading] = useState(false);
+    const [progress, setProgress] = useState(0);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
         if (!file) return;
 
-        // Validate file type
         if (!file.type.startsWith('video/')) {
             toast({ title: "Invalid file type", description: "Please select a video file" });
             return;
         }
 
-        // Validate file size (50MB limit for videos)
         if (file.size > 50 * 1024 * 1024) {
             toast({ title: "File too large", description: "Please select a video under 50MB" });
             return;
         }
 
         setUploading(true);
+        setProgress(5);
 
         try {
             const fileExt = file.name.split('.').pop();
             const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
             const filePath = `${fileName}`;
 
-            // We'll try to upload to 'editorial-videos', assuming it exists or can be created
+            // Simulating progress since Supabase upload doesn't give clean progress easily without a customized helper
+            const interval = setInterval(() => {
+                setProgress((prev) => (prev < 90 ? prev + 5 : prev));
+            }, 500);
+
             const { error: uploadError } = await supabase.storage
                 .from('editorial-videos')
                 .upload(filePath, file);
 
-            if (uploadError) {
-                // If the bucket doesn't exist, we might get an error. 
-                // In a real scenario, we'd ensure the bucket exists.
-                throw uploadError;
-            }
+            clearInterval(interval);
+            if (uploadError) throw uploadError;
 
+            setProgress(100);
             const { data } = supabase.storage
                 .from('editorial-videos')
                 .getPublicUrl(filePath);
@@ -56,55 +59,85 @@ const VideoUpload = ({ onVideoUploaded, currentVideo }: VideoUploadProps) => {
             onVideoUploaded(data.publicUrl);
 
             toast({
-                title: "Video uploaded successfully",
-                description: "Your video has been uploaded and is ready to use"
+                title: "Video uploaded",
+                description: "Your video is ready"
             });
 
         } catch (error: any) {
             console.error('Upload error:', error);
             toast({
                 title: "Upload failed",
-                description: error.message || "Failed to upload video. Ensure 'editorial-videos' bucket exists."
+                description: error.message || "Failed to upload video"
             });
         } finally {
             setUploading(false);
-            if (fileInputRef.current) {
-                fileInputRef.current.value = '';
-            }
+            setProgress(0);
+            if (fileInputRef.current) fileInputRef.current.value = '';
         }
     };
 
-    const clearVideo = () => {
-        onVideoUploaded('');
-    };
-
     return (
-        <div className="space-y-3">
-            <div className="flex items-center gap-2">
-                <Button
+        <div className="space-y-4">
+            {currentVideo ? (
+                <div className="relative group w-full max-w-sm aspect-video rounded-xl overflow-hidden border-2 border-dashed border-muted-foreground/20 bg-black">
+                    <video
+                        src={currentVideo}
+                        className="w-full h-full object-contain"
+                    />
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                        <Button
+                            type="button"
+                            variant="destructive"
+                            size="sm"
+                            onClick={() => onVideoUploaded('')}
+                            className="h-9"
+                        >
+                            <X className="h-4 w-4 mr-2" />
+                            Remove
+                        </Button>
+                        <Button
+                            type="button"
+                            variant="secondary"
+                            size="sm"
+                            onClick={() => fileInputRef.current?.click()}
+                            className="h-9"
+                        >
+                            <Upload className="h-4 w-4 mr-2" />
+                            Change
+                        </Button>
+                    </div>
+                    <div className="absolute bottom-3 right-3 p-2 bg-primary/90 text-primary-foreground rounded-full">
+                        <Play className="h-4 w-4 fill-current" />
+                    </div>
+                </div>
+            ) : (
+                <button
                     type="button"
-                    variant="outline"
-                    size="sm"
                     onClick={() => fileInputRef.current?.click()}
                     disabled={uploading}
-                    className="flex items-center gap-2"
+                    className="w-full max-w-sm aspect-video rounded-xl border-2 border-dashed border-muted-foreground/20 hover:border-primary/50 hover:bg-primary/5 transition-all flex flex-col items-center justify-center gap-3 text-muted-foreground hover:text-primary"
                 >
-                    <Video className="h-4 w-4" />
-                    {uploading ? "Uploading..." : "Upload Video"}
-                </Button>
-                {currentVideo && (
-                    <Button
-                        type="button"
-                        variant="ghost"
-                        size="sm"
-                        onClick={clearVideo}
-                        className="flex items-center gap-2"
-                    >
-                        <X className="h-4 w-4" />
-                        Remove
-                    </Button>
-                )}
-            </div>
+                    {uploading ? (
+                        <div className="flex flex-col items-center gap-2 w-full px-8">
+                            <Loader2 className="h-8 w-8 animate-spin" />
+                            <Progress value={progress} className="h-1 w-full" />
+                            <span className="text-xs font-medium uppercase tracking-wider text-center">
+                                Uploading Video... {progress}%
+                            </span>
+                        </div>
+                    ) : (
+                        <>
+                            <div className="p-4 bg-muted rounded-full group-hover:bg-primary/10 transition-colors">
+                                <Video className="h-6 w-6" />
+                            </div>
+                            <div className="text-center">
+                                <p className="font-medium text-sm">Click to upload video</p>
+                                <p className="text-xs">MP4, WebM up to 50MB</p>
+                            </div>
+                        </>
+                    )}
+                </button>
+            )}
 
             <Input
                 ref={fileInputRef}
@@ -113,17 +146,6 @@ const VideoUpload = ({ onVideoUploaded, currentVideo }: VideoUploadProps) => {
                 onChange={handleFileUpload}
                 className="hidden"
             />
-
-            {currentVideo && (
-                <div className="mt-3">
-                    <video
-                        src={currentVideo}
-                        controls
-                        className="w-full max-w-xs rounded-lg border object-cover"
-                        style={{ maxHeight: '200px' }}
-                    />
-                </div>
-            )}
         </div>
     );
 };

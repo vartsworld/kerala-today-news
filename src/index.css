@@ -108,6 +108,13 @@
 
   body {
     @apply bg-background text-foreground antialiased;
+    font-family: 'Outfit', sans-serif;
+  }
+
+  code,
+  pre,
+  .font-mono {
+    font-family: 'Fira Code', monospace;
   }
 
   /* Improved touch targets for mobile */
