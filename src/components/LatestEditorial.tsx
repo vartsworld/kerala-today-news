@@ -41,9 +41,9 @@ const LatestEditorial = () => {
 
   if (loading) {
     return (
-      <div className="animate-pulse">
-        <div className="h-4 bg-muted rounded mb-2"></div>
-        <div className="h-3 bg-muted rounded w-1/2"></div>
+      <div className="rounded-lg border bg-muted/20 p-3 animate-pulse">
+        <div className="h-4 bg-muted rounded mb-2 w-full"></div>
+        <div className="h-3 bg-muted rounded w-1/3"></div>
       </div>
     );
   }

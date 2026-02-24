@@ -101,19 +101,22 @@ const FacebookPopularPosts = () => {
     );
   }
   if (loading) {
-    return <section className="container mx-auto py-12">
-      <header className="mb-6">
-        <h2 className="text-2xl md:text-3xl font-bold">All Facebook Posts</h2>
-        <p className="text-muted-foreground">Latest updates from Achayans Media</p>
+    return <section className="container mx-auto px-4 py-8 sm:py-12">
+      <header className="mb-4 sm:mb-6">
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold">More Stories</h2>
+        <p className="text-sm sm:text-base text-muted-foreground">Comprehensive coverage for you</p>
       </header>
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {[...Array(6)].map((_, i) => <Card key={i} className="animate-pulse">
-          <div className="aspect-video bg-muted"></div>
-          <CardContent className="p-4">
-            <div className="h-4 bg-muted rounded mb-2"></div>
-            <div className="h-3 bg-muted rounded w-1/2"></div>
-          </CardContent>
-        </Card>)}
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {[...Array(6)].map((_, i) => (
+          <div key={i} className="rounded-lg border bg-card overflow-hidden animate-pulse">
+            <div className="aspect-video bg-muted"></div>
+            <div className="p-4 space-y-3">
+              <div className="h-5 bg-muted rounded w-3/4"></div>
+              <div className="h-3 bg-muted rounded w-full"></div>
+              <div className="h-3 bg-muted rounded w-1/2"></div>
+            </div>
+          </div>
+        ))}
       </div>
     </section>;
   }

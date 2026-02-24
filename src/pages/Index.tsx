@@ -71,7 +71,7 @@ const Index = () => {
         </div>
       </section>
 
-      <section id="latest" aria-labelledby="news-home" className="container mx-auto px-4 py-6 sm:py-8 md:py-12">
+      <section id="latest" aria-labelledby="news-home" className="container mx-auto px-4 pt-4 pb-8 sm:py-8 md:py-12">
         <h1 id="news-home" className="sr-only">Kerala Today News</h1>
 
         <div className="grid gap-4 sm:gap-5 lg:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-12">

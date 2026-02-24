@@ -101,7 +101,23 @@ const FacebookNewsReels = () => {
     setIsPlaying(!isPlaying);
   };
 
-  if (error || !items || items.length === 0) return null;
+  if (!items && !error) {
+    return (
+      <section className="container mx-auto px-4 py-8 sm:py-12">
+        <div className="mb-4 sm:mb-6 animate-pulse">
+          <div className="h-8 bg-muted rounded w-1/4 mb-2" />
+          <div className="h-4 bg-muted rounded w-1/3" />
+        </div>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 animate-pulse">
+          {[...Array(4)].map((_, i) => (
+            <div key={i} className="aspect-[9/16] bg-muted rounded-lg" />
+          ))}
+        </div>
+      </section>
+    );
+  }
+
+  if (error || items?.length === 0) return null;
 
   return (
     <section id="reels" className="container mx-auto px-4 py-8 sm:py-12">

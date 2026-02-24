@@ -59,25 +59,30 @@ const FacebookFeedSection = () => {
     };
   }, []);
 
-  if (error) {
+  if (!items && !error) {
     return (
       <section className="container mx-auto py-12">
-        <header className="mb-6">
-          <h2 className="text-2xl md:text-3xl font-bold">From Facebook</h2>
-          <p className="text-muted-foreground">We couldn't load the feed right now.</p>
-        </header>
-        <p className="text-sm text-muted-foreground">{error}</p>
+        <div className="mb-4 sm:mb-6 animate-pulse">
+          <div className="h-8 bg-muted rounded w-1/4 mb-2" />
+          <div className="h-4 bg-muted rounded w-1/3" />
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 animate-pulse">
+          {[...Array(4)].map((_, i) => (
+            <div key={i} className="aspect-[3/4] bg-muted rounded-lg" />
+          ))}
+        </div>
       </section>
     );
   }
 
-  if (!items) {
+  if (error) {
     return (
       <section className="container mx-auto py-12">
         <header className="mb-6">
-          <h2 className="text-2xl md:text-3xl font-bold">From Facebook</h2>
-          <p className="text-muted-foreground">Loading latest posts…</p>
+          <h2 className="text-2xl md:text-3xl font-bold">Latest Updates</h2>
+          <p className="text-muted-foreground">Multimedia news and reports</p>
         </header>
+        <p className="text-sm text-muted-foreground">{error}</p>
       </section>
     );
   }
