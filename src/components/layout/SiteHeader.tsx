@@ -19,13 +19,11 @@ const SiteHeader = () => {
   return (
     <>
       {/* Fixed header wrapper — always full-width so sticky context is preserved */}
-      <header className="fixed top-0 left-0 right-0 z-40 flex justify-center px-2 sm:px-4 transition-all duration-500 ease-in-out"
-        style={{ paddingTop: scrolled ? "8px" : "0px" }}
-      >
+      <header className="fixed top-0 left-0 right-0 z-50">
         <div
-          className={`w-full transition-all duration-500 ease-in-out ${scrolled
-              ? "max-w-[96%] sm:max-w-[90%] bg-background/95 backdrop-blur-md shadow-2xl rounded-b-[36px] sm:rounded-b-[52px]"
-              : "max-w-full bg-background border-b"
+          className={`w-full transition-all duration-300 ${scrolled
+            ? "bg-background/95 backdrop-blur-md shadow-md border-b"
+            : "bg-background border-b"
             }`}
         >
           <div className="px-4 flex h-16 sm:h-20 items-center justify-between relative">
