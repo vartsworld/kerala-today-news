@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import StickyContactCTA from "@/components/StickyContactCTA";
+import { CONTACT } from "@/config/contact";
 
 const Contact = () => {
     return (
@@ -45,7 +46,7 @@ const Contact = () => {
                                     </div>
                                     <div>
                                         <h3 className="font-bold text-lg">Email Us</h3>
-                                        <p className="text-muted-foreground">keralatodaymedia@gmail.com</p>
+                                        <p className="text-muted-foreground">{CONTACT.email}</p>
                                     </div>
                                 </div>
                             </CardContent>
@@ -59,7 +60,8 @@ const Contact = () => {
                                     </div>
                                     <div>
                                         <h3 className="font-bold text-lg">Call Us</h3>
-                                        <p className="text-muted-foreground">+91 9747 433 344</p>
+                                        <p className="text-muted-foreground font-medium">{CONTACT.name}</p>
+                                        <p className="text-muted-foreground">{CONTACT.phoneDisplay}</p>
                                     </div>
                                 </div>
                             </CardContent>
@@ -73,7 +75,7 @@ const Contact = () => {
                                     </div>
                                     <div>
                                         <h3 className="font-bold text-lg">Our Office</h3>
-                                        <p className="text-muted-foreground">Kerala, India</p>
+                                        <p className="text-muted-foreground whitespace-pre-line">{CONTACT.address}</p>
                                     </div>
                                 </div>
                             </CardContent>

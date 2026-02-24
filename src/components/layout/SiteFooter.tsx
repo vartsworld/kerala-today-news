@@ -1,5 +1,5 @@
 import { CONTACT, whatsappLink } from "@/config/contact";
-import { Phone, Mail, MessageCircle, ExternalLink } from "lucide-react";
+import { Phone, Mail, MessageCircle, ExternalLink, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const SiteFooter = () => {
@@ -53,6 +53,12 @@ const SiteFooter = () => {
                     WhatsApp
                     <ExternalLink className="h-3 w-3 opacity-60" />
                   </a>
+                )}
+                {CONTACT.address && (
+                  <div className="flex items-start gap-2 text-sm text-muted-foreground mt-1 max-w-xs">
+                    <MapPin className="h-4 w-4 mt-0.5 shrink-0 text-primary/70" />
+                    <span>{CONTACT.address}</span>
+                  </div>
                 )}
               </div>
             </div>

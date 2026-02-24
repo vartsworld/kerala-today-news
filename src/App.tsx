@@ -14,6 +14,7 @@ import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import SiteHeader from "./components/layout/SiteHeader";
 import SiteFooter from "./components/layout/SiteFooter";
+import ScrollToTop from "./components/layout/ScrollToTop";
 import IntroSplash from "./components/IntroSplash";
 import StickyContactCTA from "./components/StickyContactCTA";
 import Auth from "./pages/Auth";
@@ -36,6 +37,7 @@ const App = () => (
           <Toaster />
           <Sonner />
           <BrowserRouter>
+            <ScrollToTop />
             <SiteHeader />
             <Routes>
               <Route path="/" element={<Index />} />
