@@ -72,19 +72,7 @@ const Index = () => {
       </section>
 
       <section id="latest" aria-labelledby="news-home" className="container mx-auto px-4 py-6 sm:py-8 md:py-12">
-        {/* Mobile-only header */}
-        <header className="mb-8 md:hidden flex items-center relative h-14">
-          <img src="/lovable-uploads/kerala-today-logo.png" alt="Logo" className="h-12 w-auto rounded z-10" />
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-            <h1 id="news-home" className="text-xl font-bold leading-none">Kerala Today News</h1>
-            <p className="text-[9px] uppercase tracking-[0.1em] text-muted-foreground mt-1 font-medium leading-none">Your Daily News Source</p>
-          </div>
-        </header>
-
-        {/* Desktop header - hidden on mobile since it's in hero */}
-        <header className="mb-6 hidden md:block">
-          <h1 id="news-home" className="sr-only">Kerala Today News</h1>
-        </header>
+        <h1 id="news-home" className="sr-only">Kerala Today News</h1>
 
         <div className="grid gap-4 sm:gap-5 lg:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-12">
           {/* Featured post - full width on mobile, center on desktop */}

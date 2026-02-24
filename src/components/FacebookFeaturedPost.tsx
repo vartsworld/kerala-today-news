@@ -58,9 +58,23 @@ const FacebookFeaturedPost = () => {
       mounted = false;
     };
   }, []);
+  if (!featuredPost && !error) {
+    return (
+      <article className="relative overflow-hidden rounded-lg border bg-card shadow-sm">
+        <div className="relative aspect-[4/3] sm:aspect-[16/10] lg:aspect-[16/9] animate-pulse">
+          <div className="absolute inset-0 bg-muted" />
+          <div className="absolute bottom-4 left-4 right-4 space-y-3">
+            <div className="h-8 bg-background/20 rounded-md w-3/4" />
+            <div className="h-4 bg-background/20 rounded-md w-1/2" />
+          </div>
+        </div>
+      </article>
+    );
+  }
+
   if (error || !featuredPost) {
     return <article className="relative overflow-hidden rounded-lg border bg-card shadow-sm">
-      <div className="relative aspect-[16/9]">
+      <div className="relative aspect-[4/3] sm:aspect-[16/10] lg:aspect-[16/9]">
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
         <div className="absolute left-4 top-4">
           <Badge>Breaking</Badge>
@@ -82,7 +96,7 @@ const FacebookFeaturedPost = () => {
   return <article className="relative overflow-hidden rounded-lg border bg-card shadow-sm">
     <Link to={`/article/${slug}`}>
       <div className="relative aspect-[4/3] sm:aspect-[16/10] lg:aspect-[16/9] group">
-        {img && <img src={img.thumbnail_url || img.url} alt={`${title} - Achayans Media`} loading="lazy" className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />}
+        {img && <img src={img.thumbnail_url || img.url} alt={`${title} - Kerala Today News`} loading="lazy" className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />}
         <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/40 to-background/10" />
 
         {featuredPost.attachments?.some(a => a.type?.includes("video")) && (

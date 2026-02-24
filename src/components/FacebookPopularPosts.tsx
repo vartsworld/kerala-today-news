@@ -126,8 +126,8 @@ const FacebookPopularPosts = () => {
   };
   return <section className="container mx-auto px-4 py-8 sm:py-12">
     <header className="mb-4 sm:mb-6">
-      <h2 className="text-xl sm:text-2xl md:text-3xl font-bold">All News</h2>
-      <p className="text-sm sm:text-base text-muted-foreground">Latest updates from Achayans Media</p>
+      <h2 className="text-xl sm:text-2xl md:text-3xl font-bold">More Stories</h2>
+      <p className="text-sm sm:text-base text-muted-foreground">Comprehensive coverage for you</p>
     </header>
 
     <Masonry breakpointCols={breakpointColumnsObj} className="flex w-auto -ml-4" columnClassName="pl-4 bg-clip-padding">
@@ -139,7 +139,7 @@ const FacebookPopularPosts = () => {
         return <Card key={item.id} className="mb-4 overflow-hidden hover-scale transition-transform break-inside-avoid">
           <Link to={`/article/${slug}`}>
             {img && <div className="relative overflow-hidden bg-muted group">
-              <img src={img.thumbnail_url || img.url} alt={title} className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+              <img src={img.thumbnail_url || img.url} alt={`${title} - Kerala Today News`} className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-105" loading="lazy" />
               {item.attachments?.some(a => a.type?.includes("video")) && (
                 <div className="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/30 transition-colors">
                   <a

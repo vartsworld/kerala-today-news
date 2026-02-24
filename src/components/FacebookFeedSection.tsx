@@ -87,8 +87,8 @@ const FacebookFeedSection = () => {
   return (
     <section className="container mx-auto py-12">
       <header className="mb-4 sm:mb-6">
-        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold">Kerala Today News</h2>
-        <p className="text-sm sm:text-base text-muted-foreground">All the latest updates from Kerala Today News</p>
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold">Latest Updates</h2>
+        <p className="text-sm sm:text-base text-muted-foreground">Multimedia news and reports</p>
       </header>
       <Carousel opts={{ align: "start" }}>
         <CarouselContent className="-ml-2 md:-ml-4">
