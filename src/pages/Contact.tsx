@@ -31,8 +31,11 @@ const Contact = () => {
             <main className="container mx-auto px-4 py-12 max-w-6xl">
                 <div className="text-center mb-12">
                     <h1 className="text-4xl md:text-5xl font-bold mb-4">Get in Touch</h1>
-                    <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+                    <p className="text-muted-foreground text-lg max-w-2xl mx-auto mb-4">
                         Have a news tip, feedback, or business inquiry? We'd love to hear from you.
+                    </p>
+                    <p className="text-primary font-medium text-lg max-w-2xl mx-auto leading-relaxed">
+                        കേരളടുഡേ ന്യൂസ് എന്ന ഓൺലൈൻ പോർട്ടലിൽ നിങ്ങൾ വാർത്തകളും പരസ്യങ്ങളും നൽകാൻ ആഗ്രഹിക്കുന്നുണ്ടെങ്കിൽ ബന്ധപ്പെടുക 8547-363646
                     </p>
                 </div>
 
