@@ -10,6 +10,7 @@ import FacebookPopularPosts from "@/components/FacebookPopularPosts";
 import FacebookNewsReels from "@/components/FacebookNewsReels";
 import FacebookFeaturedPost from "@/components/FacebookFeaturedPost";
 import PublishedEditorials from "@/components/PublishedEditorials";
+import StickyContactCTA from "@/components/StickyContactCTA";
 
 const Index = () => {
   useEffect(() => {
@@ -114,6 +115,7 @@ const Index = () => {
       </section>
 
       <AboutSection />
+      <StickyContactCTA />
     </main>);
 
 };

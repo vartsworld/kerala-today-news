@@ -1,13 +1,15 @@
-import { ChevronRight, Home } from "lucide-react";
-import { Link } from "react-router-dom";
 import SEO from "@/components/SEO";
+import AboutSection from "@/components/AboutSection";
+import StickyContactCTA from "@/components/StickyContactCTA";
+import { Link } from "react-router-dom";
+import { ChevronRight, Home } from "lucide-react";
 
 const About = () => {
     return (
         <div className="min-h-screen bg-background">
             <SEO
                 title="About Us — Kerala Today News"
-                description="Learn more about Kerala Today News, your trusted source for the latest updates, in-depth analysis, and reporting from Kerala."
+                description="Learn more about Kerala Today News, our mission, and our commitment to providing accurate reporting on all matters concerning Kerala."
             />
 
             {/* Breadcrumbs */}
@@ -35,6 +37,8 @@ const About = () => {
                         Founded with a vision to deliver unbiased journalism, we bring you the latest breaking news, in-depth political analysis, cultural highlights, and community stories that matter most. Our team of experienced journalists and contributors work tirelessly to ensure that our readers stay informed about the rapidly changing landscape of Kerala.
                     </p>
 
+                    <AboutSection />
+
                     <h2 className="text-2xl font-bold text-foreground mt-12">Our Mission</h2>
                     <p>
                         Our mission is to empower our audience with truthful information, foster informed public discourse, and celebrate the rich heritage and progressive spirit of Kerala. We believe in the power of journalism to drive positive change and hold those in power accountable.
@@ -55,6 +59,7 @@ const About = () => {
                     </p>
                 </div>
             </main>
+            <StickyContactCTA />
         </div>
     );
 };

@@ -1,6 +1,7 @@
 import { ChevronRight, Home } from "lucide-react";
 import { Link } from "react-router-dom";
 import SEO from "@/components/SEO";
+import StickyContactCTA from "@/components/StickyContactCTA";
 
 const Privacy = () => {
     return (
@@ -81,6 +82,7 @@ const Privacy = () => {
                     </section>
                 </div>
             </main>
+            <StickyContactCTA />
         </div>
     );
 };

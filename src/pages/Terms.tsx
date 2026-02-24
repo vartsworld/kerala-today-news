@@ -1,6 +1,7 @@
 import { ChevronRight, Home } from "lucide-react";
 import { Link } from "react-router-dom";
 import SEO from "@/components/SEO";
+import StickyContactCTA from "@/components/StickyContactCTA";
 
 const Terms = () => {
     return (
@@ -70,6 +71,7 @@ const Terms = () => {
                     </section>
                 </div>
             </main>
+            <StickyContactCTA />
         </div>
     );
 };

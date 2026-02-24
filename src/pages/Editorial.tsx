@@ -1,5 +1,6 @@
 import SEO from "@/components/SEO";
 import PublishedEditorials from "@/components/PublishedEditorials";
+import StickyContactCTA from "@/components/StickyContactCTA";
 
 const Editorial = () => {
   return (
@@ -23,6 +24,7 @@ const Editorial = () => {
         }}
       />
       <PublishedEditorials />
+      <StickyContactCTA />
     </main>
   );
 };

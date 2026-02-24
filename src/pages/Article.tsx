@@ -11,6 +11,7 @@ import ArticleProgressBar from "@/components/ArticleProgressBar";
 import SocialShareButtons from "@/components/SocialShareButtons";
 import NewsletterSubscription from "@/components/NewsletterSubscription";
 import RelatedNewsSection from "@/components/RelatedNewsSection";
+import StickyContactCTA from "@/components/StickyContactCTA";
 import { supabase } from "@/integrations/supabase/client";
 
 interface FeedItem {
@@ -404,27 +405,8 @@ const Article = () => {
           <RelatedNewsSection articles={relatedArticles} />
         </div>
 
-        {/* Sticky Facebook Button */}
-        <div className={`fixed transition-all duration-300 z-50 flex justify-center ${isSticky
-          ? 'bottom-4 left-1/2 -translate-x-1/2 lg:top-1/2 lg:right-6 lg:left-auto lg:translate-x-0 lg:bottom-auto lg:-translate-y-1/2'
-          : 'bottom-4 left-1/2 -translate-x-1/2 lg:opacity-0 lg:pointer-events-none'
-          }`}>
-          <Button
-            asChild
-            size="lg"
-            className="bg-[#1877F2] hover:bg-[#166FE5] text-white shadow-lg lg:rounded-full lg:h-14 lg:w-14 lg:p-0"
-          >
-            <a
-              href={article.permalink_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Open on Facebook"
-            >
-              <Facebook className="h-5 w-5" />
-              <span className="ml-2 lg:hidden">Open on Facebook</span>
-            </a>
-          </Button>
-        </div>
+        {/* Unified Sticky Buttons */}
+        <StickyContactCTA isArticle={true} facebookUrl={article.permalink_url} />
       </main>
     </>
   );
