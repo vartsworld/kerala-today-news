@@ -69,9 +69,9 @@ const Index = () => {
 
       <section id="latest" aria-labelledby="news-home" className="container mx-auto px-4 py-6 sm:py-8 md:py-12">
         {/* Mobile-only header */}
-        <header className="mb-4 sm:mb-6 md:hidden">
+        <header className="mb-6 md:hidden text-center">
           <h1 id="news-home" className="text-2xl sm:text-3xl font-bold">Kerala Today News</h1>
-          <p className="text-xs uppercase tracking-wide text-muted-foreground">Your Daily News Source</p>
+          <p className="text-[10px] uppercase tracking-[0.1em] text-muted-foreground mt-1">Your Daily News Source</p>
         </header>
 
         {/* Desktop header - hidden on mobile since it's in hero */}
