@@ -1,4 +1,5 @@
-import { useEditor, EditorContent, BubbleMenu } from '@tiptap/react';
+import { useEditor, EditorContent } from '@tiptap/react';
+import { BubbleMenu } from '@tiptap/react/menus';
 import StarterKit from '@tiptap/starter-kit';
 import Image from '@tiptap/extension-image';
 import Placeholder from '@tiptap/extension-placeholder';
@@ -92,7 +93,7 @@ const RichTextEditor = ({ content, onChange, placeholder }: RichTextEditorProps)
     return (
         <div className="relative w-full">
             {/* Floating Bubble Menu */}
-            <BubbleMenu editor={editor} tippyOptions={{ duration: 100 }} className="flex items-center gap-1 bg-black/80 backdrop-blur-xl border border-white/10 rounded-full px-3 py-1.5 shadow-2xl">
+            <BubbleMenu editor={editor} className="flex items-center gap-1 bg-black/80 backdrop-blur-xl border border-white/10 rounded-full px-3 py-1.5 shadow-2xl">
                 <Toggle
                     size="sm"
                     pressed={editor.isActive('bold')}
