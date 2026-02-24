@@ -58,21 +58,34 @@ const Article = () => {
 
       try {
         const postId = slug.replace('facebook-', '');
-        
+
         // Fetch all posts to find the specific one and get related posts
-        const { data, error } = await supabase.functions.invoke('facebook-feed', {
-          body: { limit: 20 }
+        const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/facebook-feed`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+          },
+          body: JSON.stringify({ limit: 20 }),
         });
 
-        if (error) {
-          console.error('Error loading Facebook posts:', error);
-          setError(error.message);
+        if (!response.ok) {
+          setError(`HTTP Error: ${response.status}`);
+          setLoading(false);
+          return;
+        }
+
+        const data = await response.json();
+
+        if (data?.error) {
+          console.error('Error loading Facebook posts:', data.message);
+          setError(data.message || data.error);
           return;
         }
 
         const posts = data?.data || [];
         const currentPost = posts.find((post: FeedItem) => post.id === postId);
-        
+
         if (!currentPost) {
           setError('Article not found');
           return;
@@ -81,7 +94,7 @@ const Article = () => {
         setArticle(currentPost);
         // Set other posts as related (excluding current one)
         setRelatedPosts(posts.filter((post: FeedItem) => post.id !== postId).slice(0, 6));
-        
+
       } catch (err) {
         console.error('Error:', err);
         setError('Failed to load article');
@@ -135,14 +148,14 @@ const Article = () => {
   const articleTitle = article.message?.split('\n')[0]?.slice(0, 120) || 'Facebook Post';
   const articleContent = article.message || '';
   const featuredImage = article.attachments?.find(a => a.thumbnail_url || a.url);
-  
+
   // Convert related posts to RelatedArticle format
   const relatedArticles: RelatedArticle[] = relatedPosts.map(post => ({
     title: post.message?.split('\n')[0]?.slice(0, 80) || 'Facebook Post',
     excerpt: post.message?.slice(0, 150) || '',
-    image: post.attachments?.find(a => a.thumbnail_url || a.url)?.thumbnail_url || 
-           post.attachments?.find(a => a.thumbnail_url || a.url)?.url || 
-           '/lovable-uploads/kerala-today-logo.png',
+    image: post.attachments?.find(a => a.thumbnail_url || a.url)?.thumbnail_url ||
+      post.attachments?.find(a => a.thumbnail_url || a.url)?.url ||
+      '/lovable-uploads/kerala-today-logo.png',
     date: post.created_time,
     href: `/article/facebook-${post.id}`,
     source: 'Facebook'
@@ -151,7 +164,7 @@ const Article = () => {
   return (
     <>
       <ArticleProgressBar />
-      
+
       <main className="min-h-screen bg-background">
         <SEO
           title={`${articleTitle} — Kerala Today`}
@@ -174,8 +187,8 @@ const Article = () => {
               "@type": "Organization",
               name: "Kerala Today",
               url: "https://keralatoday.news",
-              logo: { 
-                "@type": "ImageObject", 
+              logo: {
+                "@type": "ImageObject",
                 url: "https://keralatoday.news/lovable-uploads/kerala-today-logo.png",
                 width: 400,
                 height: 400
@@ -230,8 +243,8 @@ const Article = () => {
                 {/* Author & Meta Info */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 py-4 border-y">
                   <div className="flex items-center space-x-3">
-                    <img 
-                      src="/lovable-uploads/kerala-today-logo.png" 
+                    <img
+                      src="/lovable-uploads/kerala-today-logo.png"
                       alt="Kerala Today"
                       className="w-10 h-10 rounded-full object-cover"
                     />
@@ -255,7 +268,7 @@ const Article = () => {
 
               {/* Social Share Buttons */}
               <div className="mb-8 flex justify-center">
-                <SocialShareButtons 
+                <SocialShareButtons
                   title={articleTitle}
                   url={`https://keralatoday.news/article/${slug}`}
                 />
@@ -264,7 +277,7 @@ const Article = () => {
               {/* Featured Image */}
               {featuredImage && (
                 <div className="mb-8">
-                  <img 
+                  <img
                     src={featuredImage.thumbnail_url || featuredImage.url}
                     alt={articleTitle}
                     className="w-full h-64 md:h-96 object-contain bg-muted rounded-lg shadow-lg"
@@ -276,9 +289,9 @@ const Article = () => {
               <div className="prose prose-lg max-w-none">
                 {articleContent.split('\n').map((paragraph, index) => {
                   const trimmedParagraph = paragraph.trim();
-                  
+
                   if (!trimmedParagraph) return null;
-                  
+
                   // Insert related news cards contextually after a few paragraphs
                   if (index === 2 && relatedArticles.length > 0) {
                     return (
@@ -293,13 +306,13 @@ const Article = () => {
                           <CardContent>
                             <div className="grid sm:grid-cols-2 gap-4">
                               {relatedArticles.slice(0, 2).map((related, idx) => (
-                                <Link 
+                                <Link
                                   key={idx}
                                   to={related.href}
                                   className="group block hover:bg-background/50 p-3 rounded-lg transition-colors"
                                 >
                                   <div className="flex gap-3">
-                                    <img 
+                                    <img
                                       src={related.image}
                                       alt={related.title}
                                       className="w-16 h-16 object-cover rounded flex-shrink-0"
@@ -321,7 +334,7 @@ const Article = () => {
                       </div>
                     );
                   }
-                  
+
                   return (
                     <p key={index} className="text-lg leading-relaxed mb-6 text-muted-foreground whitespace-pre-line">
                       {trimmedParagraph}
@@ -344,13 +357,13 @@ const Article = () => {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   {relatedArticles.slice(0, 5).map((relatedArticle, index) => (
-                    <Link 
+                    <Link
                       key={index}
                       to={relatedArticle.href}
                       className="group block hover:bg-muted/50 p-3 rounded-lg transition-colors -m-3"
                     >
                       <div className="flex gap-3">
-                        <img 
+                        <img
                           src={relatedArticle.image}
                           alt={relatedArticle.title}
                           className="w-20 h-20 object-cover rounded flex-shrink-0"
@@ -376,17 +389,16 @@ const Article = () => {
         </div>
 
         {/* Sticky Facebook Button */}
-        <div className={`fixed transition-all duration-300 z-50 flex justify-center ${
-          isSticky 
-            ? 'bottom-4 left-1/2 -translate-x-1/2 lg:top-1/2 lg:right-6 lg:left-auto lg:translate-x-0 lg:bottom-auto lg:-translate-y-1/2' 
+        <div className={`fixed transition-all duration-300 z-50 flex justify-center ${isSticky
+            ? 'bottom-4 left-1/2 -translate-x-1/2 lg:top-1/2 lg:right-6 lg:left-auto lg:translate-x-0 lg:bottom-auto lg:-translate-y-1/2'
             : 'bottom-4 left-1/2 -translate-x-1/2 lg:opacity-0 lg:pointer-events-none'
-        }`}>
+          }`}>
           <Button
             asChild
             size="lg"
             className="bg-[#1877F2] hover:bg-[#166FE5] text-white shadow-lg lg:rounded-full lg:h-14 lg:w-14 lg:p-0"
           >
-            <a 
+            <a
               href={article.permalink_url}
               target="_blank"
               rel="noopener noreferrer"

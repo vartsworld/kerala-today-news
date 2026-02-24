@@ -50,20 +50,42 @@ const FacebookStatus = () => {
     (async () => {
       setFeedLoading(true);
       setFeedError(null);
-      const { data, error } = await supabase.functions.invoke('facebook-feed', { body: { limit: 1 } });
-      if (!mounted) return;
-      if (error) {
-        setFeedError(error.message);
-        setLatest(null);
-      } else {
-        const payload = data as any;
-        if (payload?.error) {
-          setFeedError(payload.message || 'Facebook feed error');
+
+      try {
+        const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/facebook-feed`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+          },
+          body: JSON.stringify({ limit: 1 }),
+        });
+
+        if (!mounted) return;
+
+        if (!response.ok) {
+          setFeedError(`HTTP Error: ${response.status}`);
+          setLatest(null);
+          setFeedLoading(false);
+          return;
         }
-        const arr = payload?.data ?? [];
+
+        const data = await response.json();
+        if (data?.error) {
+          setFeedError(data.message || 'Facebook feed error');
+        }
+        const arr = data?.data ?? [];
         setLatest(arr[0] ?? null);
+      } catch (err: any) {
+        if (mounted) {
+          setFeedError(err.message);
+          setLatest(null);
+        }
+      } finally {
+        if (mounted) {
+          setFeedLoading(false);
+        }
       }
-      setFeedLoading(false);
     })();
     return () => { mounted = false; };
   }, [connected]);

@@ -30,22 +30,24 @@ const FacebookPopularPosts = () => {
       setLoadingMore(true);
     }
     try {
-      const {
-        data,
-        error
-      } = await supabase.functions.invoke("facebook-feed", {
-        body: {
+      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/facebook-feed`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+        },
+        body: JSON.stringify({
           limit: 6,
           offset
-        }
+        }),
       });
-      if (error) {
-        console.error(error);
-        setError(error.message);
+
+      if (!response.ok) {
+        setError(`HTTP Error: ${response.status}`);
         return;
       }
 
-      const payload = data as any;
+      const payload = await response.json();
       if (payload?.error) {
         console.error("Facebook popular error:", payload.message);
         setError(payload.message || payload.error);

@@ -19,25 +19,38 @@ const FacebookFeaturedPost = () => {
   useEffect(() => {
     let mounted = true;
     (async () => {
-      const {
-        data,
-        error
-      } = await supabase.functions.invoke("facebook-feed", {
-        body: {
-          limit: 10
+      try {
+        const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/facebook-feed`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+          },
+          body: JSON.stringify({ limit: 10 }),
+        });
+
+        if (!mounted) return;
+
+        if (!response.ok) {
+          setError(`HTTP Error: ${response.status}`);
+          return;
         }
-      });
-      if (!mounted) return;
-      if (error) {
-        console.error(error);
-        setError(error.message);
-      } else if (data?.error) {
-        console.error("Facebook featured error:", data.message);
-        setError(data.message || data.error);
-      } else {
-        // Find the first post with an image for featured display
-        const postsWithImages = (data?.data ?? []).filter((item: FeedItem) => item.attachments && item.attachments.some(att => att.thumbnail_url || att.url));
-        setFeaturedPost(postsWithImages[0] || (data?.data ?? [])[0] || null);
+
+        const data = await response.json();
+
+        if (data?.error) {
+          console.error("Facebook featured error:", data.message);
+          setError(data.message || data.error);
+        } else {
+          // Find the first post with an image for featured display
+          const postsWithImages = (data?.data ?? []).filter((item: FeedItem) => item.attachments && item.attachments.some(att => att.thumbnail_url || att.url));
+          setFeaturedPost(postsWithImages[0] || (data?.data ?? [])[0] || null);
+        }
+      } catch (err: any) {
+        if (mounted) {
+          console.error("Fetch error:", err);
+          setError(err.message);
+        }
       }
     })();
     return () => {
