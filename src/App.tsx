@@ -12,6 +12,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
+import EditorialDetail from "./pages/EditorialDetail";
 import SiteHeader from "./components/layout/SiteHeader";
 import SiteFooter from "./components/layout/SiteFooter";
 import ScrollToTop from "./components/layout/ScrollToTop";
@@ -42,6 +43,7 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/editorial" element={<Editorial />} />
+              <Route path="/editorial/:slug" element={<EditorialDetail />} />
               <Route path="/article/:slug" element={<Article />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />

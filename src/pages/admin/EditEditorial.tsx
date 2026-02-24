@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import ImageUpload from "@/components/admin/ImageUpload";
+import VideoUpload from "@/components/admin/VideoUpload";
 
 function slugify(text: string) {
   return text
@@ -20,7 +21,7 @@ function slugify(text: string) {
 async function ensureUniqueSlug(base: string, currentId: string): Promise<string> {
   let candidate = base || "untitled";
   let i = 2;
-  
+
   for (let attempts = 0; attempts < 25; attempts++) {
     const { data, error } = await (supabase.from as any)("editorials")
       .select("id")
@@ -31,7 +32,7 @@ async function ensureUniqueSlug(base: string, currentId: string): Promise<string
     if (!data) return candidate;
     candidate = `${base}-${i++}`;
   }
-  
+
   return `${base}-${Date.now()}`;
 }
 
@@ -39,12 +40,13 @@ const EditEditorial = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { toast } = useToast();
-  
+
   const [loading, setLoading] = useState(true);
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
   const [content, setContent] = useState("");
   const [cover, setCover] = useState("");
+  const [videoUrl, setVideoUrl] = useState("");
   const [isPublished, setIsPublished] = useState(false);
   const [saving, setSaving] = useState(false);
 
@@ -71,13 +73,14 @@ const EditEditorial = () => {
           setSummary(data.summary || "");
           setContent(data.content);
           setCover(data.image_url || "");
+          setVideoUrl(data.video_url || "");
           setIsPublished(data.is_published);
         }
       } catch (error: any) {
         console.error("Failed to load editorial:", error);
-        toast({ 
-          title: "Failed to load editorial", 
-          description: error.message || "Editorial not found" 
+        toast({
+          title: "Failed to load editorial",
+          description: error.message || "Editorial not found"
         });
         navigate("/admin");
       } finally {
@@ -90,7 +93,7 @@ const EditEditorial = () => {
 
   const handleSave = async () => {
     setSaving(true);
-    
+
     try {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) {
@@ -106,6 +109,7 @@ const EditEditorial = () => {
         summary,
         content,
         image_url: cover || null,
+        video_url: videoUrl || null,
         is_published: isPublished,
         published_at: isPublished ? new Date().toISOString() : null,
       };
@@ -118,17 +122,17 @@ const EditEditorial = () => {
       if (error) throw error;
 
       const desc = isPublished ? "Updated and published" : "Draft updated";
-      toast({ 
-        title: "Editorial saved", 
-        description: finalSlug !== slug ? `${desc}. Slug adjusted to ${finalSlug}` : desc 
+      toast({
+        title: "Editorial saved",
+        description: finalSlug !== slug ? `${desc}. Slug adjusted to ${finalSlug}` : desc
       });
-      
+
       navigate("/admin");
     } catch (error: any) {
       console.error("Save error:", error);
-      toast({ 
-        title: "Save failed", 
-        description: error.message || "Failed to save editorial" 
+      toast({
+        title: "Save failed",
+        description: error.message || "Failed to save editorial"
       });
     } finally {
       setSaving(false);
@@ -145,13 +149,13 @@ const EditEditorial = () => {
 
   return (
     <main className="container mx-auto max-w-3xl px-4 py-6 md:py-10">
-      <SEO 
-        title="Edit Editorial – Kerala Today News" 
-        description="Edit editorial content" 
-        canonical="/admin/edit" 
-        type="article" 
+      <SEO
+        title="Edit Editorial – Kerala Today News"
+        description="Edit editorial content"
+        canonical="/admin/edit"
+        type="article"
       />
-      
+
       <header className="mb-6">
         <h1 className="text-2xl md:text-3xl font-bold">Edit editorial</h1>
         <p className="text-muted-foreground text-sm md:text-base">Make changes and update when ready.</p>
@@ -160,83 +164,97 @@ const EditEditorial = () => {
       <div className="grid gap-4">
         <label className="grid gap-2">
           <span className="text-sm font-medium">Title</span>
-          <Input 
-            value={title} 
-            onChange={(e) => setTitle(e.target.value)} 
-            placeholder="Enter title" 
+          <Input
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="Enter title"
           />
         </label>
-        
+
         <label className="grid gap-2">
           <span className="text-sm font-medium">Slug</span>
           <Input value={slug} readOnly aria-readonly className="bg-muted" />
         </label>
-        
+
         <label className="grid gap-2">
           <span className="text-sm font-medium">Summary</span>
-          <Textarea 
-            value={summary} 
-            onChange={(e) => setSummary(e.target.value)} 
-            placeholder="Short summary" 
+          <Textarea
+            value={summary}
+            onChange={(e) => setSummary(e.target.value)}
+            placeholder="Short summary"
             rows={3}
           />
         </label>
-        
+
         <label className="grid gap-2">
           <span className="text-sm font-medium">Cover image</span>
-          <ImageUpload 
-            currentImage={cover} 
+          <ImageUpload
+            currentImage={cover}
             onImageUploaded={setCover}
           />
-          <Input 
-            value={cover} 
-            onChange={(e) => setCover(e.target.value)} 
-            placeholder="Or enter image URL directly..." 
+          <Input
+            value={cover}
+            onChange={(e) => setCover(e.target.value)}
+            placeholder="Or enter image URL directly..."
             className="text-sm"
           />
         </label>
-        
+
+        <label className="grid gap-2">
+          <span className="text-sm font-medium">Video</span>
+          <VideoUpload
+            currentVideo={videoUrl}
+            onVideoUploaded={setVideoUrl}
+          />
+          <Input
+            value={videoUrl}
+            onChange={(e) => setVideoUrl(e.target.value)}
+            placeholder="Or enter video URL directly..."
+            className="text-sm"
+          />
+        </label>
+
         <label className="grid gap-2">
           <span className="text-sm font-medium">Content (HTML or Markdown)</span>
-          <Textarea 
-            className="min-h-[200px] md:min-h-[240px]" 
-            value={content} 
-            onChange={(e) => setContent(e.target.value)} 
-            placeholder="Write your editorial…" 
+          <Textarea
+            className="min-h-[200px] md:min-h-[240px]"
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            placeholder="Write your editorial…"
           />
         </label>
 
         <div className="flex flex-col sm:flex-row gap-3 pt-4">
           <div className="flex gap-2">
-            <Button 
-              variant={!isPublished ? "secondary" : "outline"} 
-              type="button" 
+            <Button
+              variant={!isPublished ? "secondary" : "outline"}
+              type="button"
               onClick={() => setIsPublished(false)}
               className="flex-1 sm:flex-none"
             >
               Draft
             </Button>
-            <Button 
-              variant={isPublished ? "secondary" : "outline"} 
-              type="button" 
+            <Button
+              variant={isPublished ? "secondary" : "outline"}
+              type="button"
               onClick={() => setIsPublished(true)}
               className="flex-1 sm:flex-none"
             >
               Publish
             </Button>
           </div>
-          
+
           <div className="flex gap-2 sm:ml-auto">
-            <Button 
-              variant="outline" 
+            <Button
+              variant="outline"
               onClick={() => navigate("/admin")}
               disabled={saving}
               className="flex-1 sm:flex-none"
             >
               Cancel
             </Button>
-            <Button 
-              onClick={handleSave} 
+            <Button
+              onClick={handleSave}
               disabled={saving || !title || !content}
               className="flex-1 sm:flex-none"
             >

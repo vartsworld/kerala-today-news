@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import ImageUpload from "@/components/admin/ImageUpload";
+import VideoUpload from "@/components/admin/VideoUpload";
 
 function slugify(text: string) {
   return text
@@ -40,6 +41,7 @@ const WriteEditorial = () => {
   const [summary, setSummary] = useState("");
   const [content, setContent] = useState("");
   const [cover, setCover] = useState("");
+  const [videoUrl, setVideoUrl] = useState("");
   const [isPublished, setIsPublished] = useState(false);
   const [saving, setSaving] = useState(false);
 
@@ -62,6 +64,7 @@ const WriteEditorial = () => {
       summary,
       content,
       image_url: cover || null,
+      video_url: videoUrl || null,
       is_published: isPublished,
       author_id: user.id,
       published_at: isPublished ? new Date().toISOString() : null,
@@ -100,14 +103,27 @@ const WriteEditorial = () => {
         </label>
         <label className="grid gap-2">
           <span className="text-sm font-medium">Cover image</span>
-          <ImageUpload 
-            currentImage={cover} 
+          <ImageUpload
+            currentImage={cover}
             onImageUploaded={setCover}
           />
-          <Input 
-            value={cover} 
-            onChange={(e) => setCover(e.target.value)} 
-            placeholder="Or enter image URL directly..." 
+          <Input
+            value={cover}
+            onChange={(e) => setCover(e.target.value)}
+            placeholder="Or enter image URL directly..."
+            className="text-sm"
+          />
+        </label>
+        <label className="grid gap-2">
+          <span className="text-sm font-medium">Video</span>
+          <VideoUpload
+            currentVideo={videoUrl}
+            onVideoUploaded={setVideoUrl}
+          />
+          <Input
+            value={videoUrl}
+            onChange={(e) => setVideoUrl(e.target.value)}
+            placeholder="Or enter video URL directly..."
             className="text-sm"
           />
         </label>
@@ -118,17 +134,17 @@ const WriteEditorial = () => {
 
         <div className="flex flex-col sm:flex-row gap-3 pt-4">
           <div className="flex gap-2">
-            <Button 
-              variant={!isPublished ? "secondary" : "outline"} 
-              type="button" 
+            <Button
+              variant={!isPublished ? "secondary" : "outline"}
+              type="button"
               onClick={() => setIsPublished(false)}
               className="flex-1 sm:flex-none"
             >
               Draft
             </Button>
-            <Button 
-              variant={isPublished ? "secondary" : "outline"} 
-              type="button" 
+            <Button
+              variant={isPublished ? "secondary" : "outline"}
+              type="button"
               onClick={() => setIsPublished(true)}
               className="flex-1 sm:flex-none"
             >
@@ -136,8 +152,8 @@ const WriteEditorial = () => {
             </Button>
           </div>
           <div className="sm:ml-auto">
-            <Button 
-              onClick={handleSave} 
+            <Button
+              onClick={handleSave}
               disabled={saving || !title || !content}
               className="w-full sm:w-auto"
             >
