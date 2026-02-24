@@ -4,6 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Masonry from "react-masonry-css";
+import { Play } from "lucide-react";
 interface FeedItem {
   id: string;
   message?: string;
@@ -137,8 +138,15 @@ const FacebookPopularPosts = () => {
         const slug = `facebook-${item.id}`;
         return <Card key={item.id} className="mb-4 overflow-hidden hover-scale transition-transform break-inside-avoid">
           <Link to={`/article/${slug}`}>
-            {img && <div className="overflow-hidden bg-muted">
-              <img src={img.thumbnail_url || img.url} alt={title} className="w-full h-auto object-contain" loading="lazy" />
+            {img && <div className="relative overflow-hidden bg-muted group">
+              <img src={img.thumbnail_url || img.url} alt={title} className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+              {item.attachments?.some(a => a.type?.includes("video")) && (
+                <div className="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/30 transition-colors">
+                  <div className="bg-primary/90 text-primary-foreground p-2 rounded-full shadow-lg transform transition-transform group-hover:scale-125">
+                    <Play className="h-6 w-6 fill-current" />
+                  </div>
+                </div>
+              )}
             </div>}
             <CardContent className="p-3 sm:p-4">
               <h3 className="font-semibold text-base sm:text-lg leading-tight mb-2">

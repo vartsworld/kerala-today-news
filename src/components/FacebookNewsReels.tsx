@@ -140,12 +140,18 @@ const FacebookNewsReels = () => {
                     <Link to={`/article/${slug}`} aria-label={`Read: ${title}`}>
                       <AspectRatio ratio={9 / 16}>
                         <div
-                          className="relative h-full w-full bg-cover bg-center transition-transform duration-500 hover:scale-105"
+                          className="relative h-full w-full bg-cover bg-center transition-transform duration-500 hover:scale-105 group"
                           style={{
                             backgroundImage: img ? `url(${img.thumbnail_url || img.url})` : 'linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-foreground)))'
                           }}
                         >
                           <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/30 to-background/10" />
+
+                          <div className="absolute inset-0 flex items-center justify-center opacity-80 group-hover:opacity-100 transition-opacity pointer-events-none">
+                            <div className="bg-primary/90 text-primary-foreground p-3 rounded-full shadow-lg">
+                              <Play className="h-6 w-6 sm:h-8 sm:w-8 fill-current" />
+                            </div>
+                          </div>
                           <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 animate-fade-in">
                             <p className="text-xs sm:text-sm font-medium leading-snug line-clamp-3 text-foreground drop-shadow-lg">
                               {title}

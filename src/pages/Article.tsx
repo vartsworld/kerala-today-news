@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Facebook, Share2, MessageCircle, ExternalLink, ChevronRight, Home } from "lucide-react";
+import { Facebook, Share2, MessageCircle, ExternalLink, ChevronRight, Home, Play } from "lucide-react";
 import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -276,12 +276,19 @@ const Article = () => {
 
               {/* Featured Image */}
               {featuredImage && (
-                <div className="mb-8">
+                <div className="mb-8 relative group">
                   <img
                     src={featuredImage.thumbnail_url || featuredImage.url}
                     alt={articleTitle}
-                    className="w-full h-64 md:h-96 object-contain bg-muted rounded-lg shadow-lg"
+                    className="w-full h-64 md:h-[450px] object-contain bg-black rounded-lg shadow-lg"
                   />
+                  {article.attachments?.some(a => a.type?.includes("video")) && (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="bg-primary/90 text-primary-foreground p-4 sm:p-6 rounded-full shadow-2xl transform transition-transform group-hover:scale-110">
+                        <Play className="h-10 w-10 sm:h-14 sm:w-14 fill-current" />
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
 

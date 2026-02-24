@@ -96,9 +96,18 @@ const FacebookFeedSection = () => {
             const img = post.attachments?.find(a => a.thumbnail_url || a.url);
             const title = post.message?.split("\n")[0]?.slice(0, 80) || "Facebook post";
             const excerpt = post.message?.slice(0, 160) || "";
+            const isVideo = post.attachments?.some(a => a.type?.includes("video")) || false;
             return (
               <CarouselItem key={post.id} className="pl-2 md:pl-4 basis-4/5 sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
-                <NewsCard title={title} excerpt={excerpt} image={img?.thumbnail_url || img?.url} date={post.created_time} href={post.permalink_url} source="Facebook" />
+                <NewsCard
+                  title={title}
+                  excerpt={excerpt}
+                  image={img?.thumbnail_url || img?.url}
+                  date={post.created_time}
+                  href={post.permalink_url}
+                  source="Facebook"
+                  isVideo={isVideo}
+                />
               </CarouselItem>
             );
           })}

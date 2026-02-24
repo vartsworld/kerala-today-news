@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Badge } from "@/components/ui/badge";
+import { Play } from "lucide-react";
 interface FeedItem {
   id: string;
   message?: string;
@@ -80,9 +81,18 @@ const FacebookFeaturedPost = () => {
   const slug = `facebook-${featuredPost.id}`;
   return <article className="relative overflow-hidden rounded-lg border bg-card shadow-sm">
     <Link to={`/article/${slug}`}>
-      <div className="relative aspect-[4/3] sm:aspect-[16/10] lg:aspect-[16/9]">
-        {img && <img src={img.thumbnail_url || img.url} alt={`${title} - Achayans Media`} loading="lazy" className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 hover:scale-105" />}
+      <div className="relative aspect-[4/3] sm:aspect-[16/10] lg:aspect-[16/9] group">
+        {img && <img src={img.thumbnail_url || img.url} alt={`${title} - Achayans Media`} loading="lazy" className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />}
         <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/40 to-background/10" />
+
+        {featuredPost.attachments?.some(a => a.type?.includes("video")) && (
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none group-hover:bg-black/20 transition-colors">
+            <div className="bg-primary/90 text-primary-foreground p-3 sm:p-5 rounded-full shadow-2xl transform transition-all duration-300 group-hover:scale-110">
+              <Play className="h-8 w-8 sm:h-12 sm:w-12 fill-current" />
+            </div>
+          </div>
+        )}
+
         <div className="absolute left-3 top-3 sm:left-4 sm:top-4">
           <Badge className="bg-primary/90 backdrop-blur-sm text-xs sm:text-sm">Breaking</Badge>
         </div>
