@@ -5,8 +5,7 @@
 /* Design system: HSL-only tokens and semantic mapping. */
 
 @layer base {
-  /* Light theme - defined but not default */
-  .light {
+  :root {
     --background: 0 0% 100%;
     --foreground: 230 15% 10%;
 
@@ -55,55 +54,7 @@
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  /* Dark theme - default */
-  :root {
-    --background: 230 15% 7%;
-    --foreground: 0 0% 98%;
-
-    --card: 230 15% 9%;
-    --card-foreground: 0 0% 98%;
-
-    --popover: 230 15% 9%;
-    --popover-foreground: 0 0% 98%;
-
-    /* Brand - Kerala Today red */
-    --primary: 0 75% 55%;
-    --primary-foreground: 230 15% 8%;
-
-    --secondary: 230 15% 13%;
-    --secondary-foreground: 0 0% 98%;
-
-    --muted: 230 15% 13%;
-    --muted-foreground: 230 8% 70%;
-
-    --accent: 230 15% 13%;
-    --accent-foreground: 0 0% 98%;
-
-    --destructive: 0 62% 40%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 230 15% 18%;
-    --input: 230 15% 18%;
-    --ring: 0 75% 55%;
-
-    --radius: 0.75rem;
-
-    --sidebar-background: 230 15% 10%;
-    --sidebar-foreground: 0 0% 98%;
-    --sidebar-primary: 0 75% 55%;
-    --sidebar-primary-foreground: 230 15% 8%;
-    --sidebar-accent: 230 15% 13%;
-    --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 230 15% 13%;
-    --sidebar-ring: 0 75% 55%;
-
-    /* Extras */
-    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary)/0.7));
-    --gradient-subtle: linear-gradient(180deg, hsl(var(--background)), hsl(var(--background)/0.6));
-    --shadow-elevated: 0 24px 60px -20px hsl(var(--primary)/0.25);
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
+  /* Dark theme */
   .dark {
     --background: 230 15% 7%;
     --foreground: 0 0% 98%;
@@ -114,6 +65,7 @@
     --popover: 230 15% 9%;
     --popover-foreground: 0 0% 98%;
 
+    /* Brand - Kerala Today red */
     --primary: 0 75% 55%;
     --primary-foreground: 230 15% 8%;
 
@@ -145,12 +97,20 @@
 }
 
 @layer base {
-  * { @apply border-border; }
-  body { @apply bg-background text-foreground antialiased; }
-  
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+
   /* Improved touch targets for mobile */
-  button, a { @apply touch-manipulation; }
-  
+  button,
+  a {
+    @apply touch-manipulation;
+  }
+
   /* Better focus states for accessibility */
   :focus-visible {
     @apply outline-2 outline-offset-2 outline-ring;
@@ -166,6 +126,7 @@
   0% {
     transform: translateX(100%);
   }
+
   100% {
     transform: translateX(-100%);
   }
@@ -175,6 +136,7 @@
   0% {
     background-position: -200% 0;
   }
+
   100% {
     background-position: 200% 0;
   }
@@ -185,6 +147,7 @@
     opacity: 0;
     transform: translateY(8px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -196,12 +159,10 @@
 }
 
 .animate-shine {
-  background: linear-gradient(
-    90deg,
-    transparent 30%,
-    rgba(255, 255, 255, 0.5) 50%,
-    transparent 70%
-  );
+  background: linear-gradient(90deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.5) 50%,
+      transparent 70%);
   background-size: 200% 100%;
   animation: shine 2s infinite;
 }
