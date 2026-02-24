@@ -44,14 +44,14 @@ const Index = () => {
 
       <section id="hero" aria-label="Hero banner" className="relative">
         {/* Hero image - responsive aspect ratio for different screens */}
-        <div className="relative w-full aspect-[4/5] sm:aspect-[16/9] md:aspect-[21/9] lg:aspect-[21/8] overflow-hidden">
+        <div className="relative w-full aspect-[4/5] sm:aspect-[16/9] md:aspect-[21/9] lg:aspect-[21/8] overflow-hidden bg-black">
           <picture>
             <source media="(max-width: 640px)" srcSet="https://zhodvtkvhwbiwdgzocmk.supabase.co/storage/v1/object/public/lovable-uploads//kerala-today-hero.png" />
             <img
               src="/lovable-uploads/kerala-today-hero.png"
               alt="Kerala Today News - Your Daily News Source"
               loading="eager"
-              className="absolute inset-0 h-full w-full object-cover object-center sm:object-center"
+              className="absolute inset-0 h-full w-full object-contain sm:object-cover object-center"
             />
           </picture>
 
