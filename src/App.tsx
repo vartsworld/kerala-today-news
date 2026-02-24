@@ -8,6 +8,10 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Editorial from "./pages/Editorial";
 import Article from "./pages/Article";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Terms from "./pages/Terms";
+import Privacy from "./pages/Privacy";
 import SiteHeader from "./components/layout/SiteHeader";
 import SiteFooter from "./components/layout/SiteFooter";
 import IntroSplash from "./components/IntroSplash";
@@ -37,6 +41,10 @@ const App = () => (
               <Route path="/" element={<Index />} />
               <Route path="/editorial" element={<Editorial />} />
               <Route path="/article/:slug" element={<Article />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/terms" element={<Terms />} />
+              <Route path="/privacy" element={<Privacy />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="/admin" element={<ProtectedAdmin><AdminDashboard /></ProtectedAdmin>} />
               <Route path="/admin/write" element={<ProtectedAdmin><WriteEditorial /></ProtectedAdmin>} />

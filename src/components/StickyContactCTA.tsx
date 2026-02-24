@@ -4,7 +4,7 @@ import { Phone, MessageCircle } from "lucide-react";
 const StickyContactCTA = () => {
   if (!CONTACT.phoneTel && !CONTACT.whatsapp) return null;
   return (
-    <div className="fixed bottom-4 right-4 sm:bottom-5 sm:right-5 z-50 flex flex-col gap-2 sm:gap-3 animate-fade-in safe-area-bottom">
+    <div className="fixed bottom-6 right-6 sm:bottom-8 sm:right-8 z-50 flex flex-col gap-3 animate-fade-in safe-area-bottom">
       {CONTACT.whatsapp && (
         <a
           href={whatsappLink("Hi, I have news/ads to share")}

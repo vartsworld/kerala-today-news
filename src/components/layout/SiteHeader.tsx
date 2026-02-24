@@ -18,9 +18,9 @@ const SiteHeader = () => {
 
   return (
     <header
-      className={`sticky top-0 z-40 w-full transition-all duration-700 ease-in-out left-0 right-0 ${scrolled
-        ? "bg-background/95 backdrop-blur-md shadow-2xl rounded-b-[40px] sm:rounded-b-[60px] py-2 sm:py-3 border-none mx-auto max-w-[95%] sm:max-w-[90%] mt-2"
-        : "bg-background border-b py-0 mx-auto max-w-full mt-0"
+      className={`sticky top-0 z-40 w-full transition-all duration-300 left-0 right-0 ${scrolled
+        ? "bg-background/95 backdrop-blur-md shadow-md py-1"
+        : "bg-background border-b py-0"
         }`}
     >
       <div className="container mx-auto px-4 flex h-16 sm:h-20 items-center justify-between relative">
@@ -51,44 +51,81 @@ const SiteHeader = () => {
         <div className="flex sm:hidden items-center gap-2 absolute right-4">
           <ThemeToggle />
           <button
-            className="p-2 rounded-md hover:bg-accent transition-colors"
+            className="p-2 rounded-md hover:bg-accent transition-colors z-50"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileMenuOpen}
           >
-            {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Navigation Menu */}
-      {mobileMenuOpen && (
-        <nav className="sm:hidden border-t bg-background/95 backdrop-blur animate-fade-in">
-          <div className="container mx-auto px-4 py-4 flex flex-col gap-3">
+      {/* Mobile Sidebar Navigation */}
+      <div
+        className={`fixed inset-0 bg-background/80 backdrop-blur-sm z-40 transition-opacity duration-300 sm:hidden ${mobileMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+        onClick={() => setMobileMenuOpen(false)}
+      />
+
+      <nav
+        className={`fixed top-0 right-0 h-full w-[280px] bg-background border-l z-50 shadow-2xl transition-transform duration-300 ease-in-out transform sm:hidden ${mobileMenuOpen ? "translate-x-0" : "translate-x-full"}`}
+      >
+        <div className="flex flex-col h-full pt-20 pb-6 px-4">
+          <div className="flex flex-col gap-1 overflow-y-auto">
             <NavLink
               to="/"
               onClick={() => setMobileMenuOpen(false)}
-              className={({ isActive }) => `text-base py-2 px-3 rounded-md ${isActive ? "bg-accent font-medium" : "hover:bg-accent/50 transition-colors"}`}
+              className={({ isActive }) => `text-base py-3 px-4 rounded-lg flex items-center gap-3 ${isActive ? "bg-primary/10 text-primary font-bold" : "hover:bg-accent/50 transition-colors opacity-80"}`}
             >
               Home
             </NavLink>
             <NavLink
               to="/editorial"
               onClick={() => setMobileMenuOpen(false)}
-              className={({ isActive }) => `text-base py-2 px-3 rounded-md ${isActive ? "bg-accent font-medium" : "hover:bg-accent/50 transition-colors"}`}
+              className={({ isActive }) => `text-base py-3 px-4 rounded-lg flex items-center gap-3 ${isActive ? "bg-primary/10 text-primary font-bold" : "hover:bg-accent/50 transition-colors opacity-80"}`}
             >
               Editorial
             </NavLink>
-            <a
-              href="#latest"
+            <NavLink
+              to="/about"
               onClick={() => setMobileMenuOpen(false)}
-              className="text-base py-2 px-3 rounded-md bg-primary text-primary-foreground text-center font-medium"
+              className={({ isActive }) => `text-base py-3 px-4 rounded-lg ${isActive ? "bg-primary/10 text-primary font-bold" : "hover:bg-accent/50 transition-colors opacity-80"}`}
             >
-              Latest News
-            </a>
+              About Us
+            </NavLink>
+            <NavLink
+              to="/contact"
+              onClick={() => setMobileMenuOpen(false)}
+              className={({ isActive }) => `text-base py-3 px-4 rounded-lg ${isActive ? "bg-primary/10 text-primary font-bold" : "hover:bg-accent/50 transition-colors opacity-80"}`}
+            >
+              Contact Us
+            </NavLink>
+            <NavLink
+              to="/terms"
+              onClick={() => setMobileMenuOpen(false)}
+              className={({ isActive }) => `text-base py-3 px-4 rounded-lg ${isActive ? "bg-primary/10 text-primary font-bold" : "hover:bg-accent/50 transition-colors opacity-80"}`}
+            >
+              Terms & Conditions
+            </NavLink>
+            <NavLink
+              to="/privacy"
+              onClick={() => setMobileMenuOpen(false)}
+              className={({ isActive }) => `text-base py-3 px-4 rounded-lg ${isActive ? "bg-primary/10 text-primary font-bold" : "hover:bg-accent/50 transition-colors opacity-80"}`}
+            >
+              Privacy Policy
+            </NavLink>
           </div>
-        </nav>
-      )}
+
+          <div className="mt-auto pt-6 border-t">
+            <Button asChild variant="hero" className="w-full py-6 rounded-xl shadow-lg">
+              <a href="#latest" onClick={() => setMobileMenuOpen(false)}>Latest News</a>
+            </Button>
+            <p className="text-[10px] text-center text-muted-foreground mt-4 uppercase tracking-widest font-medium">
+              © {new Date().getFullYear()} Kerala Today News
+            </p>
+          </div>
+        </div>
+      </nav>
     </header>
   );
 };

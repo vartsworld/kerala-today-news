@@ -1,5 +1,6 @@
 import { CONTACT, whatsappLink } from "@/config/contact";
 import { Phone, Mail, MessageCircle, ExternalLink } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const SiteFooter = () => {
   return (
@@ -15,17 +16,17 @@ const SiteFooter = () => {
               </p>
             </div>
             <p className="text-sm text-muted-foreground mb-4 max-w-md leading-relaxed">
-              Independent local news and in-depth editorials committed to delivering accurate, 
+              Independent local news and in-depth editorials committed to delivering accurate,
               timely information to our community.
             </p>
-            
+
             {/* Contact Info */}
             <div className="space-y-2">
               <h3 className="text-sm font-semibold text-foreground mb-3">Get in Touch</h3>
               <div className="flex flex-col gap-2">
                 {CONTACT.phoneTel && (
-                  <a 
-                    href={`tel:${CONTACT.phoneTel}`} 
+                  <a
+                    href={`tel:${CONTACT.phoneTel}`}
                     className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors group"
                   >
                     <Phone className="h-4 w-4 group-hover:scale-110 transition-transform" />
@@ -33,8 +34,8 @@ const SiteFooter = () => {
                   </a>
                 )}
                 {CONTACT.email && (
-                  <a 
-                    href={`mailto:${CONTACT.email}`} 
+                  <a
+                    href={`mailto:${CONTACT.email}`}
                     className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors group"
                   >
                     <Mail className="h-4 w-4 group-hover:scale-110 transition-transform" />
@@ -42,10 +43,10 @@ const SiteFooter = () => {
                   </a>
                 )}
                 {CONTACT.whatsapp && (
-                  <a 
-                    href={whatsappLink()} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
+                  <a
+                    href={whatsappLink()}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors group"
                   >
                     <MessageCircle className="h-4 w-4 group-hover:scale-110 transition-transform" />
@@ -61,30 +62,20 @@ const SiteFooter = () => {
           <div>
             <h3 className="text-sm font-semibold text-foreground mb-4">Navigate</h3>
             <nav className="space-y-3">
-              <a 
-                className="block text-sm text-muted-foreground hover:text-primary transition-colors hover:underline underline-offset-4" 
-                href="/"
-              >
-                Home
-              </a>
-              <a 
-                className="block text-sm text-muted-foreground hover:text-primary transition-colors hover:underline underline-offset-4" 
-                href="/editorial"
-              >
-                Editorial
-              </a>
+              <Link className="block text-sm text-muted-foreground hover:text-primary transition-colors" to="/">Home</Link>
+              <Link className="block text-sm text-muted-foreground hover:text-primary transition-colors" to="/editorial">Editorial</Link>
+              <Link className="block text-sm text-muted-foreground hover:text-primary transition-colors" to="/about">About Us</Link>
+              <Link className="block text-sm text-muted-foreground hover:text-primary transition-colors" to="/contact">Contact Us</Link>
             </nav>
           </div>
 
-          {/* Services */}
+          {/* Legal */}
           <div>
-            <h3 className="text-sm font-semibold text-foreground mb-4">Services</h3>
-            <div className="space-y-3 text-sm text-muted-foreground">
-              <p>Breaking News</p>
-              <p>Editorial Analysis</p>
-              <p>Local Coverage</p>
-              <p>Media Services</p>
-            </div>
+            <h3 className="text-sm font-semibold text-foreground mb-4">Legal</h3>
+            <nav className="space-y-3">
+              <Link className="block text-sm text-muted-foreground hover:text-primary transition-colors" to="/terms">Terms & Conditions</Link>
+              <Link className="block text-sm text-muted-foreground hover:text-primary transition-colors" to="/privacy">Privacy Policy</Link>
+            </nav>
           </div>
         </div>
 
@@ -96,7 +87,7 @@ const SiteFooter = () => {
                 &copy; {new Date().getFullYear()} Kerala Today News. All rights reserved.
               </p>
             </div>
-            
+
             {/* Developer Credit */}
             <div className="text-center md:text-right">
               <p className="text-xs text-muted-foreground mb-1">
