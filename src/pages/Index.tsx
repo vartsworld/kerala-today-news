@@ -46,7 +46,7 @@ const Index = () => {
         {/* Hero image - responsive aspect ratio for different screens */}
         <div className="relative w-full aspect-[4/5] sm:aspect-[16/9] md:aspect-[21/9] lg:aspect-[21/8] overflow-hidden">
           <picture>
-            <source media="(max-width: 640px)" srcSet="/lovable-uploads/kerala-today-mobile-hero.png" />
+            <source media="(max-width: 640px)" srcSet="https://zhodvtkvhwbiwdgzocmk.supabase.co/storage/v1/object/public/lovable-uploads//kerala-today-hero.png" />
             <img
               src="/lovable-uploads/kerala-today-hero.png"
               alt="Kerala Today News - Your Daily News Source"

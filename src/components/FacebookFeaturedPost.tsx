@@ -86,10 +86,16 @@ const FacebookFeaturedPost = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/40 to-background/10" />
 
         {featuredPost.attachments?.some(a => a.type?.includes("video")) && (
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none group-hover:bg-black/20 transition-colors">
-            <div className="bg-primary/90 text-primary-foreground p-3 sm:p-5 rounded-full shadow-2xl transform transition-all duration-300 group-hover:scale-110">
+          <div className="absolute inset-0 flex items-center justify-center group-hover:bg-black/20 transition-colors">
+            <a
+              href={featuredPost.permalink_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-primary/90 text-primary-foreground p-3 sm:p-5 rounded-full shadow-2xl transform transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 z-10"
+              onClick={(e) => e.stopPropagation()}
+            >
               <Play className="h-8 w-8 sm:h-12 sm:w-12 fill-current" />
-            </div>
+            </a>
           </div>
         )}
 

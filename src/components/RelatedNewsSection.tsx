@@ -8,6 +8,8 @@ interface RelatedArticle {
   date: string;
   href: string;
   source: string;
+  isVideo?: boolean;
+  facebookUrl?: string;
 }
 
 interface RelatedNewsSectionProps {
@@ -24,10 +26,10 @@ const RelatedNewsSection = ({ articles }: RelatedNewsSectionProps) => {
           Related News
         </h2>
         <p className="text-muted-foreground max-w-2xl mx-auto">
-          Explore more stories and insights from Achayans Media
+          Explore more stories and insights from Kerala Today News
         </p>
       </div>
-      
+
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {articles.map((article, index) => (
           <NewsCard
@@ -38,6 +40,8 @@ const RelatedNewsSection = ({ articles }: RelatedNewsSectionProps) => {
             date={article.date}
             href={article.href}
             source={article.source}
+            isVideo={article.isVideo}
+            facebookUrl={article.facebookUrl}
           />
         ))}
       </div>

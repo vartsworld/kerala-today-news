@@ -107,6 +107,7 @@ const FacebookFeedSection = () => {
                   href={post.permalink_url}
                   source="Facebook"
                   isVideo={isVideo}
+                  facebookUrl={post.permalink_url}
                 />
               </CarouselItem>
             );

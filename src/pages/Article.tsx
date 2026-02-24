@@ -28,6 +28,8 @@ interface RelatedArticle {
   date: string;
   href: string;
   source: string;
+  isVideo?: boolean;
+  facebookUrl?: string;
 }
 
 const Article = () => {
@@ -158,7 +160,9 @@ const Article = () => {
       '/lovable-uploads/kerala-today-logo.png',
     date: post.created_time,
     href: `/article/facebook-${post.id}`,
-    source: 'Facebook'
+    source: 'Facebook',
+    isVideo: post.attachments?.some(a => a.type?.includes('video')),
+    facebookUrl: post.permalink_url
   }));
 
   return (
@@ -284,9 +288,14 @@ const Article = () => {
                   />
                   {article.attachments?.some(a => a.type?.includes("video")) && (
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="bg-primary/90 text-primary-foreground p-4 sm:p-6 rounded-full shadow-2xl transform transition-transform group-hover:scale-110">
+                      <a
+                        href={article.permalink_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bg-primary/90 text-primary-foreground p-4 sm:p-6 rounded-full shadow-2xl transform transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 z-10"
+                      >
                         <Play className="h-10 w-10 sm:h-14 sm:w-14 fill-current" />
-                      </div>
+                      </a>
                     </div>
                   )}
                 </div>

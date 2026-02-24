@@ -147,10 +147,16 @@ const FacebookNewsReels = () => {
                         >
                           <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/30 to-background/10" />
 
-                          <div className="absolute inset-0 flex items-center justify-center opacity-80 group-hover:opacity-100 transition-opacity pointer-events-none">
-                            <div className="bg-primary/90 text-primary-foreground p-3 rounded-full shadow-lg">
+                          <div className="absolute inset-0 flex items-center justify-center opacity-80 group-hover:opacity-100 transition-opacity">
+                            <a
+                              href={item.permalink_url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="bg-primary/90 text-primary-foreground p-3 rounded-full shadow-lg transform transition-transform hover:scale-125 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 z-10"
+                              onClick={(e) => e.stopPropagation()}
+                            >
                               <Play className="h-6 w-6 sm:h-8 sm:w-8 fill-current" />
-                            </div>
+                            </a>
                           </div>
                           <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 animate-fade-in">
                             <p className="text-xs sm:text-sm font-medium leading-snug line-clamp-3 text-foreground drop-shadow-lg">

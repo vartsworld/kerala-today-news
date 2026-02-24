@@ -10,9 +10,10 @@ interface NewsCardProps {
   href: string;
   source?: string;
   isVideo?: boolean;
+  facebookUrl?: string;
 }
 
-const NewsCard = ({ title, excerpt, image, date, href, source, isVideo }: NewsCardProps) => {
+const NewsCard = ({ title, excerpt, image, date, href, source, isVideo, facebookUrl }: NewsCardProps) => {
   return (
     <article className="h-full">
       <Card className="h-full flex flex-col overflow-hidden group">
@@ -26,9 +27,21 @@ const NewsCard = ({ title, excerpt, image, date, href, source, isVideo }: NewsCa
             />
             {isVideo && (
               <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-colors">
-                <div className="bg-primary/90 text-primary-foreground p-3 rounded-full shadow-lg transform transition-transform group-hover:scale-125">
-                  <Play className="h-6 w-6 fill-current" />
-                </div>
+                {facebookUrl ? (
+                  <a
+                    href={facebookUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-primary/90 text-primary-foreground p-3 rounded-full shadow-lg transform transition-transform hover:scale-125 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 z-10"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <Play className="h-6 w-6 fill-current" />
+                  </a>
+                ) : (
+                  <div className="bg-primary/90 text-primary-foreground p-3 rounded-full shadow-lg transform transition-transform group-hover:scale-125">
+                    <Play className="h-6 w-6 fill-current" />
+                  </div>
+                )}
               </div>
             )}
           </div>

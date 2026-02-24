@@ -142,9 +142,15 @@ const FacebookPopularPosts = () => {
               <img src={img.thumbnail_url || img.url} alt={title} className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-105" loading="lazy" />
               {item.attachments?.some(a => a.type?.includes("video")) && (
                 <div className="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/30 transition-colors">
-                  <div className="bg-primary/90 text-primary-foreground p-2 rounded-full shadow-lg transform transition-transform group-hover:scale-125">
+                  <a
+                    href={item.permalink_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-primary/90 text-primary-foreground p-2 rounded-full shadow-lg transform transition-transform hover:scale-125 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 z-10"
+                    onClick={(e) => e.stopPropagation()}
+                  >
                     <Play className="h-6 w-6 fill-current" />
-                  </div>
+                  </a>
                 </div>
               )}
             </div>}
