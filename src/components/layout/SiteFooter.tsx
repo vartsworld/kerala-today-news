@@ -93,9 +93,15 @@ const SiteFooter = () => {
               <p className="text-xs text-muted-foreground mb-1">
                 Developed & Designed by
               </p>
-              <p className="text-sm font-medium text-primary">
-                V ARTS WORLD Pvt. Ltd.
-              </p>
+              <a
+                href="https://vawtech.in"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-medium text-primary hover:underline hover:opacity-80 transition-all flex items-center justify-center md:justify-end gap-1"
+              >
+                VAW Technologies
+                <ExternalLink className="h-3 w-3" />
+              </a>
             </div>
           </div>
         </div>
