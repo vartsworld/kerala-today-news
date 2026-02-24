@@ -14,11 +14,11 @@ const Editorial = () => {
           "@type": "CollectionPage",
           "name": "Editorial Section - Kerala Today News",
           "description": "Editorial opinions and analysis from Kerala Today News",
-          "url": "https://keralatodaynews.com/editorial",
+          "url": "https://www.keralatoday.news/editorial",
           "isPartOf": {
             "@type": "WebSite",
             "name": "Kerala Today News",
-            "url": "https://keralatodaynews.com"
+            "url": "https://www.keralatoday.news"
           }
         }}
       />

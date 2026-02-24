@@ -181,22 +181,22 @@ const Article = () => {
             author: {
               "@type": "Organization",
               name: "Kerala Today",
-              url: "https://keralatoday.news"
+              url: "https://www.keralatoday.news"
             },
             publisher: {
               "@type": "Organization",
               name: "Kerala Today",
-              url: "https://keralatoday.news",
+              url: "https://www.keralatoday.news",
               logo: {
                 "@type": "ImageObject",
-                url: "https://keralatoday.news/lovable-uploads/kerala-today-logo.png",
+                url: "https://www.keralatoday.news/lovable-uploads/kerala-today-logo.png",
                 width: 400,
                 height: 400
               }
             },
             mainEntityOfPage: {
               "@type": "WebPage",
-              "@id": `https://keralatoday.news/article/${slug}`
+              "@id": `https://www.keralatoday.news/article/${slug}`
             }
           }}
         />
@@ -270,7 +270,7 @@ const Article = () => {
               <div className="mb-8 flex justify-center">
                 <SocialShareButtons
                   title={articleTitle}
-                  url={`https://keralatoday.news/article/${slug}`}
+                  url={`https://www.keralatoday.news/article/${slug}`}
                 />
               </div>
 
@@ -390,8 +390,8 @@ const Article = () => {
 
         {/* Sticky Facebook Button */}
         <div className={`fixed transition-all duration-300 z-50 flex justify-center ${isSticky
-            ? 'bottom-4 left-1/2 -translate-x-1/2 lg:top-1/2 lg:right-6 lg:left-auto lg:translate-x-0 lg:bottom-auto lg:-translate-y-1/2'
-            : 'bottom-4 left-1/2 -translate-x-1/2 lg:opacity-0 lg:pointer-events-none'
+          ? 'bottom-4 left-1/2 -translate-x-1/2 lg:top-1/2 lg:right-6 lg:left-auto lg:translate-x-0 lg:bottom-auto lg:-translate-y-1/2'
+          : 'bottom-4 left-1/2 -translate-x-1/2 lg:opacity-0 lg:pointer-events-none'
           }`}>
           <Button
             asChild

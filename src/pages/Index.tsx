@@ -34,8 +34,8 @@ const Index = () => {
           "@context": "https://schema.org",
           "@type": "NewsMediaOrganization",
           "name": "Kerala Today News",
-          "url": "https://keralatodaynews.com",
-          "logo": "https://keralatodaynews.com/lovable-uploads/kerala-today-logo.png",
+          "url": "https://www.keralatoday.news",
+          "logo": "https://www.keralatoday.news/lovable-uploads/kerala-today-logo.png",
           "sameAs": ["https://facebook.com/KeralaTodayNews"],
           "description": "Breaking news, in-depth editorials, and comprehensive media coverage from Kerala Today News.",
           "foundingDate": "2020"
@@ -52,7 +52,7 @@ const Index = () => {
             className="absolute inset-0 h-full w-full object-cover object-center" />
 
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
-          
+
           {/* Hero content overlay for larger screens */}
           <div className="hidden md:flex absolute bottom-0 left-0 right-0 p-6 lg:p-8">
             <div className="container mx-auto">
@@ -73,12 +73,12 @@ const Index = () => {
           <h1 id="news-home" className="text-2xl sm:text-3xl font-bold">Kerala Today News</h1>
           <p className="text-xs uppercase tracking-wide text-muted-foreground">Your Daily News Source</p>
         </header>
-        
+
         {/* Desktop header - hidden on mobile since it's in hero */}
         <header className="mb-6 hidden md:block">
           <h1 id="news-home" className="sr-only">Kerala Today News</h1>
         </header>
-        
+
         <div className="grid gap-4 sm:gap-5 lg:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-12">
           {/* Featured post - full width on mobile, center on desktop */}
           <div className="lg:col-span-6 order-1">

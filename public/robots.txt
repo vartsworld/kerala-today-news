@@ -15,4 +15,4 @@ Allow: /
 Disallow: /admin/
 Disallow: /auth
 
-Sitemap: https://keralatodaynews.com/sitemap.xml
+Sitemap: https://www.keralatoday.news/sitemap.xml

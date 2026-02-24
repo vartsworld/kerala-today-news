@@ -26,20 +26,33 @@ export const SEO = ({
   keywords = [],
 }: SEOProps) => {
   const siteName = "Kerala Today News";
-  const baseUrl = "https://keralatodaynews.com";
+  const baseUrl = "https://www.keralatoday.news";
   const defaultImage = `${baseUrl}/lovable-uploads/kerala-today-logo.png`;
   const seoImage = image || defaultImage;
   const fullCanonical = canonical ? `${baseUrl}${canonical}` : baseUrl;
-  const defaultKeywords = ["Kerala Today News", "breaking news", "editorials", "Kerala news", "journalism", "media coverage"];
+  const defaultKeywords = [
+    "Kerala Today News",
+    "breaking news Kerala",
+    "Malayalam news",
+    "Kerala latest updates",
+    "Kerala editorials",
+    "Kerala political news",
+    "Kerala society news",
+    "Achayans Media",
+    "Kerala journalism",
+    "Kerala media coverage",
+    "today Kerala news",
+    "live news Kerala"
+  ];
   const allKeywords = [...defaultKeywords, ...keywords].join(", ");
-  
+
   return (
     <Helmet>
       <title>{title}</title>
       {description && <meta name="description" content={description} />}
       <meta name="keywords" content={allKeywords} />
       <link rel="canonical" href={fullCanonical} />
-      
+
       {/* Open Graph */}
       <meta property="og:site_name" content={siteName} />
       <meta property="og:title" content={title} />
@@ -51,7 +64,7 @@ export const SEO = ({
       <meta property="og:image:height" content="630" />
       <meta property="og:image:alt" content={title} />
       <meta property="og:locale" content="en_US" />
-      
+
       {/* Article-specific meta */}
       {type === "article" && publishedTime && (
         <meta property="article:published_time" content={publishedTime} />
@@ -71,19 +84,19 @@ export const SEO = ({
       {description && <meta name="twitter:description" content={description} />}
       <meta name="twitter:image" content={seoImage} />
       <meta name="twitter:image:alt" content={title} />
-      
+
       {/* Additional SEO meta tags */}
       <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
       <meta name="googlebot" content="index, follow" />
       <meta name="author" content={author || siteName} />
       <meta name="publisher" content={siteName} />
-      
+
       {/* Mobile optimization */}
       <meta name="format-detection" content="telephone=no" />
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
       <meta name="apple-mobile-web-app-title" content={siteName} />
-      
+
       {structuredData && (
         <script type="application/ld+json">
           {JSON.stringify(structuredData)}
