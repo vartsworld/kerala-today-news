@@ -49,7 +49,7 @@ const Index = () => {
             src="/lovable-uploads/kerala-today-hero.png"
             alt="Kerala Today News - Your Daily News Source"
             loading="eager"
-            className="absolute inset-0 h-full w-full object-cover object-center" />
+            className="absolute inset-0 h-full w-full object-cover object-center sm:object-center object-[center_30%]" />
 
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
 
