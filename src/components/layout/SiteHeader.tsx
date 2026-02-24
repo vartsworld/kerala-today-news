@@ -8,15 +8,16 @@ const SiteHeader = () => {
 
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto px-4 flex h-16 sm:h-20 items-center justify-center relative">
-        <Link to="/" className="flex flex-col items-center justify-center" aria-label="Kerala Today News home">
-          <div className="flex items-center gap-2 sm:gap-3">
-            <img src="/lovable-uploads/kerala-today-logo.png" alt="Kerala Today News logo" className="h-8 w-auto sm:h-10 rounded" />
-            <span className="text-lg sm:text-2xl font-extrabold tracking-tight bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
-              Kerala Today News
-            </span>
-          </div>
-          <span className="text-[9px] sm:text-[11px] uppercase tracking-[0.2em] text-muted-foreground mt-1 font-medium">
+      <div className="container mx-auto px-4 flex h-16 sm:h-20 items-center justify-between relative">
+        <Link to="/" className="z-10 shrink-0" aria-label="Kerala Today News home">
+          <img src="/lovable-uploads/kerala-today-logo.png" alt="Kerala Today News logo" className="h-10 w-auto sm:h-14 rounded" />
+        </Link>
+
+        <Link to="/" className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center justify-center text-center w-full max-w-[200px] sm:max-w-none">
+          <span className="text-lg sm:text-2xl font-extrabold tracking-tight bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent leading-none">
+            Kerala Today News
+          </span>
+          <span className="text-[9px] sm:text-[11px] uppercase tracking-[0.2em] text-muted-foreground mt-1.5 font-medium leading-none whitespace-nowrap">
             Your Daily News Source
           </span>
         </Link>
