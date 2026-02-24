@@ -19,34 +19,38 @@ import EditEditorial from "./pages/admin/EditEditorial";
 import FacebookSettings from "./pages/admin/FacebookSettings";
 import ProtectedAdmin from "./components/admin/ProtectedAdmin";
 
+import { ThemeProvider } from "./components/theme-provider";
+
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <HelmetProvider>
-      <TooltipProvider>
-        <IntroSplash />
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <SiteHeader />
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/editorial" element={<Editorial />} />
-            <Route path="/article/:slug" element={<Article />} />
-            <Route path="/auth" element={<Auth />} />
-            <Route path="/admin" element={<ProtectedAdmin><AdminDashboard /></ProtectedAdmin>} />
-            <Route path="/admin/write" element={<ProtectedAdmin><WriteEditorial /></ProtectedAdmin>} />
-            <Route path="/admin/edit/:id" element={<ProtectedAdmin><EditEditorial /></ProtectedAdmin>} />
-            <Route path="/admin/facebook" element={<ProtectedAdmin><FacebookSettings /></ProtectedAdmin>} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-          <StickyContactCTA />
-          <SiteFooter />
-        </BrowserRouter>
-      </TooltipProvider>
-    </HelmetProvider>
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <HelmetProvider>
+        <TooltipProvider>
+          <IntroSplash />
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <SiteHeader />
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/editorial" element={<Editorial />} />
+              <Route path="/article/:slug" element={<Article />} />
+              <Route path="/auth" element={<Auth />} />
+              <Route path="/admin" element={<ProtectedAdmin><AdminDashboard /></ProtectedAdmin>} />
+              <Route path="/admin/write" element={<ProtectedAdmin><WriteEditorial /></ProtectedAdmin>} />
+              <Route path="/admin/edit/:id" element={<ProtectedAdmin><EditEditorial /></ProtectedAdmin>} />
+              <Route path="/admin/facebook" element={<ProtectedAdmin><FacebookSettings /></ProtectedAdmin>} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+            <StickyContactCTA />
+            <SiteFooter />
+          </BrowserRouter>
+        </TooltipProvider>
+      </HelmetProvider>
+    </ThemeProvider>
   </QueryClientProvider>
 );
 

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import { ThemeToggle } from "./ThemeToggle";
 
 const SiteHeader = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -18,8 +19,8 @@ const SiteHeader = () => {
   return (
     <header
       className={`sticky top-0 z-40 w-full transition-all duration-700 ease-in-out left-0 right-0 ${scrolled
-          ? "bg-background/95 backdrop-blur-md shadow-2xl rounded-b-[40px] sm:rounded-b-[60px] py-2 sm:py-3 border-none mx-auto max-w-[95%] sm:max-w-[90%] mt-2"
-          : "bg-background border-b py-0 mx-auto max-w-full mt-0"
+        ? "bg-background/95 backdrop-blur-md shadow-2xl rounded-b-[40px] sm:rounded-b-[60px] py-2 sm:py-3 border-none mx-auto max-w-[95%] sm:max-w-[90%] mt-2"
+        : "bg-background border-b py-0 mx-auto max-w-full mt-0"
         }`}
     >
       <div className="container mx-auto px-4 flex h-16 sm:h-20 items-center justify-between relative">
@@ -43,17 +44,21 @@ const SiteHeader = () => {
           <Button asChild variant="hero" size="sm" className="text-xs sm:text-sm px-3 sm:px-4">
             <a href="#latest" className="story-link" aria-label="Jump to latest">Latest</a>
           </Button>
+          <ThemeToggle />
         </nav>
 
-        {/* Mobile Menu Button */}
-        <button
-          className="sm:hidden p-2 rounded-md hover:bg-accent transition-colors absolute right-4"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-          aria-expanded={mobileMenuOpen}
-        >
-          {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
+        {/* Mobile Actions */}
+        <div className="flex sm:hidden items-center gap-2 absolute right-4">
+          <ThemeToggle />
+          <button
+            className="p-2 rounded-md hover:bg-accent transition-colors"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileMenuOpen}
+          >
+            {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Navigation Menu */}
