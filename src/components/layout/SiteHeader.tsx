@@ -1,13 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 
 const SiteHeader = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header
+      className={`sticky top-0 z-40 w-full transition-all duration-700 ease-in-out left-0 right-0 ${scrolled
+          ? "bg-background/95 backdrop-blur-md shadow-2xl rounded-b-[40px] sm:rounded-b-[60px] py-2 sm:py-3 border-none mx-auto max-w-[95%] sm:max-w-[90%] mt-2"
+          : "bg-background border-b py-0 mx-auto max-w-full mt-0"
+        }`}
+    >
       <div className="container mx-auto px-4 flex h-16 sm:h-20 items-center justify-between relative">
         <Link to="/" className="z-10 shrink-0" aria-label="Kerala Today News home">
           <img src="/lovable-uploads/kerala-today-logo.png" alt="Kerala Today News logo" className="h-10 w-auto sm:h-14 rounded" />
