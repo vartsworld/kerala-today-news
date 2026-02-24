@@ -183,6 +183,50 @@
   animation: fade-in 0.3s ease-out forwards;
 }
 
+/* Tiptap Editor Styles */
+.ProseMirror {
+  outline: none !important;
+}
+
+.ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+  height: 0;
+}
+
+.ProseMirror img {
+  @apply rounded-xl border border-white/5 shadow-2xl;
+  display: block;
+  margin: 2rem auto;
+  max-width: 100%;
+}
+
+.ProseMirror blockquote {
+  @apply border-l-4 border-primary pl-4 italic text-white/60 my-6;
+}
+
+.ProseMirror h1 {
+  @apply text-4xl font-bold text-white mb-6;
+}
+
+.ProseMirror h2 {
+  @apply text-2xl font-bold text-white mb-4;
+}
+
+.ProseMirror ul {
+  @apply list-disc list-inside space-y-2 my-4;
+}
+
+.ProseMirror ol {
+  @apply list-decimal list-inside space-y-2 my-4;
+}
+
+.ProseMirror a {
+  @apply text-primary underline underline-offset-4 cursor-pointer;
+}
+
 /* Safe area insets for mobile devices with notches */
 @supports (padding: env(safe-area-inset-bottom)) {
   .safe-area-bottom {

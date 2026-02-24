@@ -24,6 +24,7 @@ import WriteEditorial from "./pages/admin/WriteEditorial";
 import EditEditorial from "./pages/admin/EditEditorial";
 import FacebookSettings from "./pages/admin/FacebookSettings";
 import ProtectedAdmin from "./components/admin/ProtectedAdmin";
+import EditorialStudio from "./pages/admin/EditorialStudio";
 
 import { ThemeProvider } from "./components/theme-provider";
 
@@ -53,6 +54,7 @@ const App = () => (
               <Route path="/admin" element={<ProtectedAdmin><AdminDashboard /></ProtectedAdmin>} />
               <Route path="/admin/write" element={<ProtectedAdmin><WriteEditorial /></ProtectedAdmin>} />
               <Route path="/admin/edit/:id" element={<ProtectedAdmin><EditEditorial /></ProtectedAdmin>} />
+              <Route path="/admin/studio" element={<ProtectedAdmin><EditorialStudio /></ProtectedAdmin>} />
               <Route path="/admin/facebook" element={<ProtectedAdmin><FacebookSettings /></ProtectedAdmin>} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
