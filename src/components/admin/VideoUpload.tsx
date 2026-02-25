@@ -67,7 +67,10 @@ const VideoUpload = ({ onVideoUploaded, currentVideo }: VideoUploadProps) => {
             console.error('Upload error:', error);
             toast({
                 title: "Upload failed",
-                description: error.message || "Failed to upload video"
+                description: error.message === "Bucket not found"
+                    ? "The 'editorial-videos' bucket is missing in Supabase! Please create it in your Supabase Storage dashboard."
+                    : (error.message || "Failed to upload video"),
+                variant: "destructive"
             });
         } finally {
             setUploading(false);

@@ -63,7 +63,10 @@ const ImageUpload = ({ onImageUploaded, currentImage }: ImageUploadProps) => {
       console.error('Upload error:', error);
       toast({
         title: "Upload failed",
-        description: error.message || "Failed to upload image"
+        description: error.message === "Bucket not found"
+          ? "The 'editorial-images' bucket is missing in Supabase! Please create it in your Supabase Storage dashboard."
+          : (error.message || "Failed to upload image"),
+        variant: "destructive"
       });
     } finally {
       setUploading(false);

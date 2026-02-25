@@ -89,11 +89,24 @@ const RichTextEditor = ({ content, onChange, placeholder }: RichTextEditorProps)
                     editor?.chain().focus().setImage({ src: data.publicUrl }).run();
                     toast({ title: "Image inserted" });
                 } catch (error: any) {
-                    toast({ title: "Upload failed", description: error.message, variant: "destructive" });
+                    toast({
+                        title: "Upload failed",
+                        description: error.message === "Bucket not found"
+                            ? "The 'editorial-images' bucket is missing! Ask an Admin to run the Supabase migration."
+                            : error.message,
+                        variant: "destructive"
+                    });
                 }
             }
         };
         input.click();
+    };
+
+    const addImageUrl = () => {
+        const url = window.prompt('Paste an Image URL:');
+        if (url) {
+            editor?.chain().focus().setImage({ src: url }).run();
+        }
     };
 
     if (!editor) return null;
@@ -222,9 +235,9 @@ const RichTextEditor = ({ content, onChange, placeholder }: RichTextEditorProps)
                 <Button
                     variant="ghost"
                     size="sm"
-                    onClick={addImage}
+                    onClick={addImageUrl}
                     className="h-8 px-2"
-                    title="Insert Image"
+                    title="Insert Image via URL"
                 >
                     <ImageIcon className="h-4 w-4" />
                 </Button>
@@ -245,8 +258,11 @@ const RichTextEditor = ({ content, onChange, placeholder }: RichTextEditorProps)
 
             {/* Inline Quick Actions Floating button */}
             <div className="fixed bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-background/80 backdrop-blur-2xl border border-border rounded-2xl px-4 py-3 shadow-2xl opacity-80 hover:opacity-100 transition-opacity z-50">
-                <Button variant="outline" size="sm" onClick={addImage} className="font-semibold shadow-sm">
-                    <ImageIcon className="h-4 w-4 mr-2" /> Insert Image
+                <Button variant="outline" size="sm" onClick={addImage} className="font-semibold shadow-sm text-xs">
+                    <ImageIcon className="h-4 w-4 mr-2" /> Upload Image
+                </Button>
+                <Button variant="ghost" size="sm" onClick={addImageUrl} className="font-semibold text-xs text-muted-foreground hover:text-foreground">
+                    URL Image
                 </Button>
                 <Separator orientation="vertical" className="h-6 mx-1" />
                 <Button variant="ghost" size="sm" onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()} className="hover:bg-accent hover:text-accent-foreground">

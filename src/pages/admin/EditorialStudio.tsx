@@ -158,6 +158,12 @@ const EditorialStudio = () => {
                                         </h2>
                                         <p className="text-xs text-muted-foreground uppercase tracking-widest font-semibold pt-4">Publication Cover</p>
                                         <ImageUpload currentImage={cover} onImageUploaded={setCover} />
+                                        <Input
+                                            value={cover}
+                                            onChange={(e) => setCover(e.target.value)}
+                                            placeholder="Or paste an Image URL..."
+                                            className="bg-transparent border-input text-foreground text-xs font-mono"
+                                        />
                                     </div>
 
                                     <div className="space-y-4 pt-6 border-t border-border">
@@ -174,6 +180,12 @@ const EditorialStudio = () => {
                                         <div className="space-y-2">
                                             <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Featured Video</label>
                                             <VideoUpload currentVideo={videoUrl} onVideoUploaded={setVideoUrl} />
+                                            <Input
+                                                value={videoUrl}
+                                                onChange={(e) => setVideoUrl(e.target.value)}
+                                                placeholder="Or paste a Video URL..."
+                                                className="bg-transparent border-input text-foreground text-xs font-mono mt-2"
+                                            />
                                         </div>
                                     </div>
 
