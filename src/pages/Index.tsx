@@ -52,8 +52,8 @@ const Index = () => {
               src="/lovable-uploads/kerala-today-hero.png"
               alt="Kerala Today News - Your Daily News Source"
               loading="eager"
-              className="absolute inset-0 h-full w-full object-cover object-center"
-            />
+              className="absolute inset-0 h-full w-full object-cover object-center" />
+
           </picture>
 
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
@@ -64,7 +64,7 @@ const Index = () => {
               <h1 className="text-3xl lg:text-4xl font-bold text-foreground drop-shadow-lg">
                 Kerala Today News
               </h1>
-              <p className="text-sm lg:text-base text-muted-foreground drop-shadow-md mt-1">Your Daily News Source
+              <p className="text-sm lg:text-base text-muted-foreground drop-shadow-md mt-1">Your Daily News Source 
 
               </p>
             </div>
