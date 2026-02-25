@@ -145,8 +145,8 @@ const EditorialStudio = () => {
                         <Sheet>
                             <SheetTrigger asChild>
                                 <Button variant="secondary" size="sm" className="bg-secondary hover:bg-secondary/80 text-secondary-foreground border border-border">
-                                    <Settings className="h-4 w-4 sm:mr-2" />
-                                    <span className="hidden sm:inline">Settings</span>
+                                    <Send className="h-4 w-4 sm:mr-2" />
+                                    <span className="hidden sm:inline">Publish</span>
                                 </Button>
                             </SheetTrigger>
                             <SheetContent className="bg-card border-l border-border text-card-foreground w-full sm:max-w-md overflow-y-auto">
@@ -203,17 +203,24 @@ const EditorialStudio = () => {
                                                 <p className="font-bold text-sm text-primary">Public Visibility</p>
                                                 <p className="text-[10px] text-muted-foreground leading-tight">Published editorials are visible to all readers.</p>
                                             </div>
-                                            <Button
-                                                size="sm"
-                                                variant={isPublished ? "default" : "outline"}
-                                                onClick={() => setIsPublished(!isPublished)}
-                                                className={cn(
-                                                    "rounded-full px-4 h-8 text-[10px] font-bold uppercase tracking-widest",
-                                                    isPublished ? "bg-primary text-primary-foreground" : "border-border text-foreground"
-                                                )}
-                                            >
-                                                {isPublished ? "Live" : "Draft"}
-                                            </Button>
+                                            <div className="flex items-center gap-2">
+                                                <span className={cn("text-xs font-semibold", !isPublished ? "text-primary" : "text-muted-foreground")}>Draft</span>
+                                                <div
+                                                    onClick={() => setIsPublished(!isPublished)}
+                                                    className={cn(
+                                                        "w-10 h-5 flex items-center rounded-full p-1 cursor-pointer transition-colors border",
+                                                        isPublished ? "bg-primary border-primary" : "bg-muted border-input"
+                                                    )}
+                                                >
+                                                    <div
+                                                        className={cn(
+                                                            "bg-background w-3.5 h-3.5 rounded-full shadow-sm transform transition-transform",
+                                                            isPublished ? "translate-x-4" : "translate-x-0"
+                                                        )}
+                                                    />
+                                                </div>
+                                                <span className={cn("text-xs font-semibold", isPublished ? "text-primary" : "text-muted-foreground")}>Live</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
