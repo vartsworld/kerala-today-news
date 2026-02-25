@@ -7,6 +7,7 @@ interface Editorial {
   summary: string | null;
   slug: string;
   published_at: string | null;
+  image_url: string | null;
 }
 
 const LatestEditorial = () => {
@@ -18,7 +19,7 @@ const LatestEditorial = () => {
       try {
         const { data, error } = await supabase
           .from('editorials')
-          .select('id, title, summary, slug, published_at')
+          .select('id, title, summary, slug, published_at, image_url')
           .eq('is_published', true)
           .order('published_at', { ascending: false })
           .limit(1)
@@ -58,6 +59,13 @@ const LatestEditorial = () => {
 
   return (
     <a href={`/editorial/${editorial.slug}`} className="block rounded-lg border bg-card p-3 hover-scale">
+      {editorial.image_url && (
+        <img
+          src={editorial.image_url}
+          alt={editorial.title}
+          className="w-full h-32 object-cover rounded-md mb-3"
+        />
+      )}
       <p className="text-sm font-medium leading-snug">{editorial.title}</p>
       <span className="text-xs text-muted-foreground">
         Editorial • {editorial.published_at ? new Date(editorial.published_at).toLocaleDateString() : 'Draft'}
