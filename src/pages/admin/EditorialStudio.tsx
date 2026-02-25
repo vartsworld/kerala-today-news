@@ -222,6 +222,17 @@ const EditorialStudio = () => {
                                                 <span className={cn("text-xs font-semibold", isPublished ? "text-primary" : "text-muted-foreground")}>Live</span>
                                             </div>
                                         </div>
+
+                                        {isPublished && (
+                                            <Button
+                                                onClick={handleSave}
+                                                disabled={saving || !title}
+                                                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-primary/20 font-bold mt-2"
+                                            >
+                                                {saving ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : <Send className="h-4 w-4 mr-2" />}
+                                                {saving ? "Publishing..." : "Publish Editorial Now"}
+                                            </Button>
+                                        )}
                                     </div>
                                 </div>
                             </SheetContent>
