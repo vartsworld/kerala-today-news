@@ -6,10 +6,15 @@ const Editorial = () => {
   return (
     <main className="container mx-auto py-10">
       <SEO
-        title="Editorial — Kerala Today News"
-        description="Opinion and analysis from the Kerala Today News editorial desk. Expert commentary on current events, politics, and society from our experienced editorial team."
+        title="Editorials & Opinion — Kerala Today News"
+        description="Read expert editorials and opinion pieces on Kerala politics, society, culture, and current affairs from Kerala Today News editorial desk."
         canonical="/editorial"
         type="website"
+        keywords={["Kerala editorial", "Kerala opinion", "Kerala political analysis", "Kerala commentary"]}
+        breadcrumbs={[
+          { name: "Home", href: "/" },
+          { name: "Editorial" },
+        ]}
         structuredData={{
           "@context": "https://schema.org",
           "@type": "CollectionPage",

@@ -97,11 +97,46 @@ const EditorialDetail = () => {
             <ArticleProgressBar />
             <main className="min-h-screen bg-background">
                 <SEO
-                    title={`${editorial.title} — Editorial | Kerala Today`}
-                    description={editorial.summary || editorial.content.slice(0, 160)}
+                    title={`${editorial.title} — Editorial | Kerala Today News`}
+                    description={editorial.summary || editorial.content.replace(/<[^>]*>/g, '').slice(0, 160)}
                     canonical={`/editorial/${editorial.slug}`}
                     type="article"
                     image={editorial.image_url || undefined}
+                    publishedTime={editorial.published_at || undefined}
+                    author={editorial.author_name || "Kerala Today Desk"}
+                    keywords={["Kerala editorial", "opinion Kerala", editorial.title.split(' ').slice(0, 3).join(' ')]}
+                    breadcrumbs={[
+                        { name: "Home", href: "/" },
+                        { name: "Editorial", href: "/editorial" },
+                        { name: editorial.title },
+                    ]}
+                    structuredData={{
+                        "@context": "https://schema.org",
+                        "@type": "NewsArticle",
+                        "headline": editorial.title,
+                        "description": editorial.summary || editorial.content.replace(/<[^>]*>/g, '').slice(0, 160),
+                        "image": editorial.image_url || "https://www.keralatoday.news/lovable-uploads/kerala-today-logo.png",
+                        "datePublished": editorial.published_at,
+                        "author": {
+                            "@type": "Person",
+                            "name": editorial.author_name || "Kerala Today Desk"
+                        },
+                        "publisher": {
+                            "@type": "Organization",
+                            "name": "Kerala Today News",
+                            "url": "https://www.keralatoday.news",
+                            "logo": {
+                                "@type": "ImageObject",
+                                "url": "https://www.keralatoday.news/lovable-uploads/kerala-today-logo.png",
+                                "width": 512,
+                                "height": 512
+                            }
+                        },
+                        "mainEntityOfPage": {
+                            "@type": "WebPage",
+                            "@id": `https://www.keralatoday.news/editorial/${editorial.slug}`
+                        }
+                    }}
                 />
 
                 {/* Breadcrumbs */}
