@@ -9,7 +9,24 @@ const About = () => {
         <div className="min-h-screen bg-background">
             <SEO
                 title="About Us — Kerala Today News"
-                description="Learn more about Kerala Today News, our mission, and our commitment to providing accurate reporting on all matters concerning Kerala."
+                description="Learn about Kerala Today News — a premier digital news platform delivering accurate, unbiased journalism and comprehensive coverage from all 14 districts of Kerala."
+                canonical="/about"
+                keywords={["about Kerala Today News", "Kerala news team", "Kerala journalism"]}
+                breadcrumbs={[
+                    { name: "Home", href: "/" },
+                    { name: "About Us" },
+                ]}
+                structuredData={{
+                    "@context": "https://schema.org",
+                    "@type": "AboutPage",
+                    "name": "About Kerala Today News",
+                    "url": "https://www.keralatoday.news/about",
+                    "isPartOf": {
+                        "@type": "WebSite",
+                        "name": "Kerala Today News",
+                        "url": "https://www.keralatoday.news"
+                    }
+                }}
             />
 
             {/* Breadcrumbs */}

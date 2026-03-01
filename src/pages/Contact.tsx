@@ -13,7 +13,33 @@ const Contact = () => {
         <div className="min-h-screen bg-background">
             <SEO
                 title="Contact Us — Kerala Today News"
-                description="Get in touch with Kerala Today News. We value your feedback, news tips, and inquiries."
+                description="Contact Kerala Today News for news tips, advertising, feedback, or business inquiries. Reach us at +91 85473 63646 or email keralatodaychannel24x7@gmail.com."
+                canonical="/contact"
+                keywords={["contact Kerala Today News", "Kerala news tips", "Kerala news advertising"]}
+                breadcrumbs={[
+                    { name: "Home", href: "/" },
+                    { name: "Contact Us" },
+                ]}
+                structuredData={{
+                    "@context": "https://schema.org",
+                    "@type": "ContactPage",
+                    "name": "Contact Kerala Today News",
+                    "url": "https://www.keralatoday.news/contact",
+                    "mainEntity": {
+                        "@type": "Organization",
+                        "name": "Kerala Today News",
+                        "telephone": "+918547363646",
+                        "email": "keralatodaychannel24x7@gmail.com",
+                        "address": {
+                            "@type": "PostalAddress",
+                            "streetAddress": "Navami Communication, Nalini Building, Near Erattappana Temple, Chirayinkeezhu Road",
+                            "addressLocality": "Attingal",
+                            "postalCode": "695101",
+                            "addressRegion": "Kerala",
+                            "addressCountry": "IN"
+                        }
+                    }
+                }}
             />
 
             <nav className="border-b bg-muted/30">

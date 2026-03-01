@@ -28,18 +28,31 @@ const Index = () => {
   return (
     <main>
       <SEO
-        title="Kerala Today News — Breaking News & Editorial Excellence"
-        description="Your trusted source for breaking news, in-depth editorials, and comprehensive media coverage. Stay informed with Kerala Today News's latest updates and expert analysis."
+        title="Kerala Today News — Breaking News, Editorials & Live Updates"
+        description="Kerala Today News delivers breaking news, in-depth editorials, political analysis, and live updates from all 14 districts of Kerala. Your trusted Malayalam & English news source."
         canonical="/"
+        keywords={["Kerala breaking news today", "Malayalam news live", "Kerala politics", "Attingal news", "Thiruvananthapuram news update"]}
         structuredData={{
           "@context": "https://schema.org",
           "@type": "NewsMediaOrganization",
           "name": "Kerala Today News",
+          "alternateName": ["KTN", "Kerala Today", "കേരള ടുഡേ ന്യൂസ്"],
           "url": "https://www.keralatoday.news",
-          "logo": "https://www.keralatoday.news/lovable-uploads/kerala-today-logo.png",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.keralatoday.news/lovable-uploads/kerala-today-logo.png",
+            "width": 512,
+            "height": 512
+          },
           "sameAs": ["https://facebook.com/KeralaTodayNews"],
-          "description": "Breaking news, in-depth editorials, and comprehensive media coverage from Kerala Today News.",
-          "foundingDate": "2020"
+          "description": "Kerala Today News delivers breaking news, in-depth editorials, and comprehensive media coverage from Kerala.",
+          "foundingDate": "2020",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Attingal",
+            "addressRegion": "Kerala",
+            "addressCountry": "IN"
+          }
         }} />
 
 

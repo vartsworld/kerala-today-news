@@ -1,6 +1,9 @@
 User-agent: Googlebot
 Allow: /
 
+User-agent: Googlebot-News
+Allow: /
+
 User-agent: Bingbot
 Allow: /
 
@@ -16,3 +19,4 @@ Disallow: /admin/
 Disallow: /auth
 
 Sitemap: https://www.keralatoday.news/sitemap.xml
+Sitemap: https://zhodvtkvhwbiwdgzocmk.supabase.co/functions/v1/sitemap
