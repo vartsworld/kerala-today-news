@@ -20,11 +20,11 @@ const About = () => {
                     "@context": "https://schema.org",
                     "@type": "AboutPage",
                     "name": "About Kerala Today News",
-                    "url": "https://www.keralatoday.news/about",
+                    "url": "https://keralatoday.news/about",
                     "isPartOf": {
                         "@type": "WebSite",
                         "name": "Kerala Today News",
-                        "url": "https://www.keralatoday.news"
+                        "url": "https://keralatoday.news"
                     }
                 }}
             />
