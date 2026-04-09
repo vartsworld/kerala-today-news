@@ -6,15 +6,15 @@ const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
 };
 
-const BASE_URL = "https://www.keralatoday.news";
+const BASE_URL = "https://keralatoday.news";
 
 const staticPages = [
-  { loc: "/", priority: "1.0", changefreq: "hourly" },
-  { loc: "/editorial", priority: "0.9", changefreq: "daily" },
-  { loc: "/about", priority: "0.6", changefreq: "monthly" },
-  { loc: "/contact", priority: "0.5", changefreq: "monthly" },
-  { loc: "/terms", priority: "0.3", changefreq: "yearly" },
-  { loc: "/privacy", priority: "0.3", changefreq: "yearly" },
+  { loc: "/", title: "Kerala Today News — Breaking News, Editorials & Live Updates", priority: "1.0", changefreq: "hourly" },
+  { loc: "/editorial", title: "Editorials & Opinion — Kerala Today News", priority: "0.9", changefreq: "daily" },
+  { loc: "/about", title: "About Us — Kerala Today News", priority: "0.6", changefreq: "monthly" },
+  { loc: "/contact", title: "Contact Us — Kerala Today News", priority: "0.5", changefreq: "monthly" },
+  { loc: "/terms", title: "Terms & Conditions — Kerala Today News", priority: "0.3", changefreq: "yearly" },
+  { loc: "/privacy", title: "Privacy Policy — Kerala Today News", priority: "0.3", changefreq: "yearly" },
 ];
 
 Deno.serve(async () => {
@@ -25,7 +25,7 @@ Deno.serve(async () => {
 
     const { data: editorials } = await supabase
       .from("editorials")
-      .select("slug, updated_at, published_at")
+      .select("slug, title, updated_at, published_at, image_url")
       .eq("is_published", true)
       .order("published_at", { ascending: false });
 
@@ -62,7 +62,12 @@ Deno.serve(async () => {
         <news:language>en</news:language>
       </news:publication>
       <news:publication_date>${ed.published_at || now}</news:publication_date>
-    </news:news>
+      <news:title>${escapeXml(ed.title)}</news:title>
+    </news:news>${ed.image_url ? `
+    <image:image>
+      <image:loc>${escapeXml(ed.image_url)}</image:loc>
+      <image:title>${escapeXml(ed.title)}</image:title>
+    </image:image>` : ""}
   </url>
 `;
       }
@@ -76,3 +81,12 @@ Deno.serve(async () => {
     return new Response("Error generating sitemap", { status: 500 });
   }
 });
+
+function escapeXml(str: string): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
+}

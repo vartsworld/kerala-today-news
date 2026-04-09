@@ -18,5 +18,5 @@ Allow: /
 Disallow: /admin/
 Disallow: /auth
 
-Sitemap: https://www.keralatoday.news/sitemap.xml
+Sitemap: https://keralatoday.news/sitemap.xml
 Sitemap: https://zhodvtkvhwbiwdgzocmk.supabase.co/functions/v1/sitemap
