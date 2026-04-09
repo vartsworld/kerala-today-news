@@ -9,6 +9,12 @@ const Privacy = () => {
             <SEO
                 title="Privacy Policy — Kerala Today News"
                 description="Understand how Kerala Today News collects, uses, and protects your personal information."
+                canonical="/privacy"
+                keywords={["Kerala Today privacy policy", "Kerala news privacy", "Kerala Today data policy"]}
+                breadcrumbs={[
+                    { name: "Home", href: "/" },
+                    { name: "Privacy Policy" },
+                ]}
             />
 
             <nav className="border-b bg-muted/30">

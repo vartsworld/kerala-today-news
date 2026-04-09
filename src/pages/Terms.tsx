@@ -9,6 +9,12 @@ const Terms = () => {
             <SEO
                 title="Terms & Conditions — Kerala Today News"
                 description="Read our terms and conditions for using the Kerala Today News platform."
+                canonical="/terms"
+                keywords={["Kerala Today terms", "Kerala news terms and conditions", "Kerala Today policies"]}
+                breadcrumbs={[
+                    { name: "Home", href: "/" },
+                    { name: "Terms & Conditions" },
+                ]}
             />
 
             <nav className="border-b bg-muted/30">

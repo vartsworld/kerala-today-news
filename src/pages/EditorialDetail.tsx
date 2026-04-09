@@ -115,7 +115,7 @@ const EditorialDetail = () => {
                         "@type": "NewsArticle",
                         "headline": editorial.title,
                         "description": editorial.summary || editorial.content.replace(/<[^>]*>/g, '').slice(0, 160),
-                        "image": editorial.image_url || "https://www.keralatoday.news/lovable-uploads/kerala-today-logo.png",
+                        "image": editorial.image_url || "https://keralatoday.news/lovable-uploads/kerala-today-logo.png",
                         "datePublished": editorial.published_at,
                         "author": {
                             "@type": "Person",
@@ -124,17 +124,17 @@ const EditorialDetail = () => {
                         "publisher": {
                             "@type": "Organization",
                             "name": "Kerala Today News",
-                            "url": "https://www.keralatoday.news",
+                            "url": "https://keralatoday.news",
                             "logo": {
                                 "@type": "ImageObject",
-                                "url": "https://www.keralatoday.news/lovable-uploads/kerala-today-logo.png",
+                                "url": "https://keralatoday.news/lovable-uploads/kerala-today-logo.png",
                                 "width": 512,
                                 "height": 512
                             }
                         },
                         "mainEntityOfPage": {
                             "@type": "WebPage",
-                            "@id": `https://www.keralatoday.news/editorial/${editorial.slug}`
+                            "@id": `https://keralatoday.news/editorial/${editorial.slug}`
                         }
                     }}
                 />
@@ -193,7 +193,7 @@ const EditorialDetail = () => {
                             <div className="flex justify-center">
                                 <SocialShareButtons
                                     title={editorial.title}
-                                    url={`https://www.keralatoday.news/editorial/${editorial.slug}`}
+                                    url={`https://keralatoday.news/editorial/${editorial.slug}`}
                                 />
                             </div>
 
