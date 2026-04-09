@@ -20,31 +20,34 @@ interface SEOProps {
   noindex?: boolean;
 }
 
-const BASE_URL = "https://www.keralatoday.news";
+const BASE_URL = "https://keralatoday.news";
 const SITE_NAME = "Kerala Today News";
 const DEFAULT_IMAGE = `${BASE_URL}/lovable-uploads/kerala-today-logo.png`;
 
 const MASTER_KEYWORDS = [
+  // Brand keywords
   "Kerala Today News",
+  "Kerala Today",
+  "keralatoday.news",
+  "KTN news",
+  // English trending keywords
   "Kerala news today",
   "breaking news Kerala",
-  "Malayalam news",
   "Kerala latest news",
-  "Kerala updates",
-  "Kerala editorials",
-  "Kerala political news",
-  "Kerala society news",
-  "Kerala current affairs",
   "Kerala news live",
   "today Kerala news",
   "Kerala news online",
   "Kerala daily news",
-  "Achayans Media",
-  "Kerala journalism",
-  "Kerala media coverage",
-  "Attingal news",
-  "Thiruvananthapuram news",
-  "Kerala district news",
+  "Kerala updates",
+  "Kerala current affairs",
+  "Kerala breaking news today",
+  "latest news from Kerala",
+  "Kerala headlines today",
+  "Kerala news highlights",
+  // Category keywords
+  "Kerala editorials",
+  "Kerala political news",
+  "Kerala society news",
   "Kerala government news",
   "Kerala economy news",
   "Kerala sports news",
@@ -53,11 +56,41 @@ const MASTER_KEYWORDS = [
   "Kerala education news",
   "Kerala health news",
   "Kerala technology news",
+  "Kerala crime news",
+  "Kerala weather news",
+  "Kerala flood news",
+  "Kerala election news",
+  // District keywords
+  "Attingal news",
+  "Thiruvananthapuram news",
+  "Kochi news today",
+  "Kozhikode news",
+  "Thrissur news",
+  "Kannur news",
+  "Kollam news",
+  "Palakkad news",
+  "Malappuram news",
+  "Alappuzha news",
+  "Idukki news",
+  "Wayanad news",
+  "Pathanamthitta news",
+  "Kasaragod news",
+  "Kerala district news",
+  // NRI & diaspora
   "NRI Kerala news",
   "Pravasi Malayali news",
+  "Gulf Malayali news",
+  // Malayalam keywords
   "കേരള വാർത്തകൾ",
   "മലയാളം വാർത്ത",
   "കേരള ന്യൂസ്",
+  "കേരള ടുഡേ",
+  "ഇന്നത്തെ വാർത്ത",
+  "കേരള ബ്രേക്കിംഗ് ന്യൂസ്",
+  // Achayans Media
+  "Achayans Media",
+  "Kerala journalism",
+  "Kerala media coverage",
 ];
 
 const buildBreadcrumbSchema = (breadcrumbs: BreadcrumbItem[]) => ({
@@ -89,7 +122,6 @@ export const SEO = ({
   const fullCanonical = canonical ? `${BASE_URL}${canonical}` : BASE_URL;
   const allKeywords = [...new Set([...MASTER_KEYWORDS, ...keywords])].join(", ");
 
-  // Auto-generate article structured data if not provided
   const autoStructuredData = type === "article" && !structuredData ? {
     "@context": "https://schema.org",
     "@type": "NewsArticle",
@@ -127,10 +159,17 @@ export const SEO = ({
       <meta name="keywords" content={allKeywords} />
       <link rel="canonical" href={fullCanonical} />
 
-      {/* Hreflang for multilingual audience */}
       <link rel="alternate" hrefLang="en" href={fullCanonical} />
       <link rel="alternate" hrefLang="ml" href={fullCanonical} />
       <link rel="alternate" hrefLang="x-default" href={fullCanonical} />
+
+      {/* Favicon */}
+      <link rel="icon" type="image/png" sizes="512x512" href="/lovable-uploads/kerala-today-logo.png" />
+      <link rel="icon" type="image/png" sizes="192x192" href="/lovable-uploads/kerala-today-logo.png" />
+      <link rel="icon" type="image/png" sizes="32x32" href="/lovable-uploads/kerala-today-logo.png" />
+      <link rel="icon" type="image/png" sizes="16x16" href="/lovable-uploads/kerala-today-logo.png" />
+      <link rel="apple-touch-icon" sizes="180x180" href="/lovable-uploads/kerala-today-logo.png" />
+      <link rel="shortcut icon" href="/lovable-uploads/kerala-today-logo.png" />
 
       {/* Open Graph */}
       <meta property="og:site_name" content={SITE_NAME} />
@@ -145,7 +184,6 @@ export const SEO = ({
       <meta property="og:locale" content="en_IN" />
       <meta property="og:locale:alternate" content="ml_IN" />
 
-      {/* Article-specific meta */}
       {type === "article" && publishedTime && (
         <meta property="article:published_time" content={publishedTime} />
       )}
@@ -178,30 +216,25 @@ export const SEO = ({
       />
       <meta name="googlebot" content={noindex ? "noindex, nofollow" : "index, follow"} />
 
-      {/* Author & Publisher */}
       <meta name="author" content={author || SITE_NAME} />
       <meta name="publisher" content={SITE_NAME} />
       <meta name="news_keywords" content={allKeywords} />
 
-      {/* Geo targeting */}
       <meta name="geo.region" content="IN-KL" />
       <meta name="geo.placename" content="Kerala" />
       <meta name="content-language" content="en, ml" />
 
-      {/* Mobile optimization */}
       <meta name="format-detection" content="telephone=no" />
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
       <meta name="apple-mobile-web-app-title" content={SITE_NAME} />
 
-      {/* Structured data */}
       {autoStructuredData && (
         <script type="application/ld+json">
           {JSON.stringify(autoStructuredData)}
         </script>
       )}
 
-      {/* Breadcrumb schema */}
       {breadcrumbs && breadcrumbs.length > 0 && (
         <script type="application/ld+json">
           {JSON.stringify(buildBreadcrumbSchema(breadcrumbs))}

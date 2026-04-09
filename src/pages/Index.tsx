@@ -37,10 +37,10 @@ const Index = () => {
           "@type": "NewsMediaOrganization",
           "name": "Kerala Today News",
           "alternateName": ["KTN", "Kerala Today", "കേരള ടുഡേ ന്യൂസ്"],
-          "url": "https://www.keralatoday.news",
+          "url": "https://keralatoday.news",
           "logo": {
             "@type": "ImageObject",
-            "url": "https://www.keralatoday.news/lovable-uploads/kerala-today-logo.png",
+            "url": "https://keralatoday.news/lovable-uploads/kerala-today-logo.png",
             "width": 512,
             "height": 512
           },

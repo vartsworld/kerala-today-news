@@ -24,7 +24,7 @@ const Contact = () => {
                     "@context": "https://schema.org",
                     "@type": "ContactPage",
                     "name": "Contact Kerala Today News",
-                    "url": "https://www.keralatoday.news/contact",
+                    "url": "https://keralatoday.news/contact",
                     "mainEntity": {
                         "@type": "Organization",
                         "name": "Kerala Today News",
