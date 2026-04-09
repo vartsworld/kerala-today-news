@@ -185,23 +185,23 @@ const Article = () => {
             datePublished: article.created_time,
             author: {
               "@type": "Organization",
-              name: "Kerala Today",
-              url: "https://www.keralatoday.news"
+              name: "Kerala Today News",
+              url: "https://keralatoday.news"
             },
             publisher: {
               "@type": "Organization",
-              name: "Kerala Today",
-              url: "https://www.keralatoday.news",
+              name: "Kerala Today News",
+              url: "https://keralatoday.news",
               logo: {
                 "@type": "ImageObject",
-                url: "https://www.keralatoday.news/lovable-uploads/kerala-today-logo.png",
+                url: "https://keralatoday.news/lovable-uploads/kerala-today-logo.png",
                 width: 400,
                 height: 400
               }
             },
             mainEntityOfPage: {
               "@type": "WebPage",
-              "@id": `https://www.keralatoday.news/article/${slug}`
+              "@id": `https://keralatoday.news/article/${slug}`
             }
           }}
         />
