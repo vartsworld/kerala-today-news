@@ -33,11 +33,11 @@ const EditorialDetail = () => {
             if (!slug) return;
 
             try {
+                const decodedSlug = decodeURIComponent(slug);
                 const { data, error } = await supabase
                     .from("editorials")
                     .select("*")
-                    .eq("slug", slug)
-                    .eq("is_published", true)
+                    .eq("slug", decodedSlug)
                     .maybeSingle();
 
                 if (error) throw error;
@@ -163,12 +163,12 @@ const EditorialDetail = () => {
                         <article className="space-y-8">
                             <header className="space-y-6">
                                 <Badge variant="secondary">Editorial</Badge>
-                                <h1 className="text-3xl md:text-5xl font-bold leading-tight">
+                                <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight">
                                     {editorial.title}
                                 </h1>
 
                                 {editorial.summary && (
-                                    <p className="text-xl text-muted-foreground leading-relaxed italic">
+                                    <p className="text-base sm:text-lg text-muted-foreground leading-relaxed italic">
                                         {editorial.summary}
                                     </p>
                                 )}
@@ -197,9 +197,9 @@ const EditorialDetail = () => {
                                 />
                             </div>
 
-                            {/* Media Section */}
-                            <div className="space-y-6">
-                                {editorial.video_url ? (
+                            {/* Media Section (Video if available) */}
+                            {editorial.video_url && (
+                                <div className="space-y-6">
                                     <div className="aspect-video w-full overflow-hidden rounded-xl bg-black shadow-2xl">
                                         <video
                                             src={editorial.video_url}
@@ -208,14 +208,8 @@ const EditorialDetail = () => {
                                             poster={editorial.image_url || undefined}
                                         />
                                     </div>
-                                ) : editorial.image_url ? (
-                                    <img
-                                        src={editorial.image_url}
-                                        alt={editorial.title}
-                                        className="w-full h-auto rounded-xl shadow-lg object-cover max-h-[500px]"
-                                    />
-                                ) : null}
-                            </div>
+                                </div>
+                            )}
 
                             {/* Content */}
                             <div

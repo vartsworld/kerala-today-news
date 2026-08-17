@@ -235,11 +235,11 @@ const Article = () => {
                   <Badge variant="secondary" className="w-fit">
                     News
                   </Badge>
-                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
+                  <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight">
                     {articleTitle}
                   </h1>
                   {articleContent.length > 100 && (
-                    <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
+                    <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
                       {articleContent.slice(0, 200)}...
                     </p>
                   )}

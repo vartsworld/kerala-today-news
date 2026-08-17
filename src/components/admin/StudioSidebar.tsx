@@ -2,10 +2,18 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Search, Loader2, FileText, Calendar } from "lucide-react";
+import { Search, Loader2, FileText, Calendar, MoreVertical, Archive, Trash2, Globe } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
+import { useToast } from "@/hooks/use-toast";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 interface StudioSidebarProps {
     onSelect: (id: string) => void;
@@ -13,6 +21,7 @@ interface StudioSidebarProps {
 }
 
 const StudioSidebar = ({ onSelect, selectedId }: StudioSidebarProps) => {
+    const { toast } = useToast();
     const [editorials, setEditorials] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState("");
@@ -32,6 +41,45 @@ const StudioSidebar = ({ onSelect, selectedId }: StudioSidebarProps) => {
     useEffect(() => {
         fetchEditorials();
     }, []);
+
+    const togglePublishStatus = async (e: React.MouseEvent, item: any) => {
+        e.stopPropagation();
+        const newStatus = !item.is_published;
+        const { error } = await supabase
+            .from("editorials")
+            .update({ 
+                is_published: newStatus,
+                published_at: newStatus ? new Date().toISOString() : null 
+            })
+            .eq("id", item.id);
+
+        if (error) {
+            toast({ title: "Failed to update status", description: error.message, variant: "destructive" });
+        } else {
+            toast({ title: newStatus ? "Editorial Published" : "Editorial Archived to Draft" });
+            fetchEditorials();
+        }
+    };
+
+    const handleDelete = async (e: React.MouseEvent, item: any) => {
+        e.stopPropagation();
+        if (!window.confirm(`Are you sure you want to delete "${item.title || 'Untitled'}"?`)) return;
+
+        const { error } = await supabase
+            .from("editorials")
+            .delete()
+            .eq("id", item.id);
+
+        if (error) {
+            toast({ title: "Delete failed", description: error.message, variant: "destructive" });
+        } else {
+            toast({ title: "Editorial deleted" });
+            if (selectedId === item.id) {
+                onSelect('new');
+            }
+            fetchEditorials();
+        }
+    };
 
     const filtered = editorials.filter(e =>
         e.title.toLowerCase().includes(search.toLowerCase()) ||
@@ -69,11 +117,11 @@ const StudioSidebar = ({ onSelect, selectedId }: StudioSidebarProps) => {
                         </div>
                     ) : (
                         filtered.map((item) => (
-                            <button
+                            <div
                                 key={item.id}
                                 onClick={() => onSelect(item.id)}
                                 className={cn(
-                                    "w-full text-left transition-all group",
+                                    "w-full text-left transition-all cursor-pointer group relative block",
                                     selectedId === item.id ? "scale-[1.02]" : "hover:scale-[1.01]"
                                 )}
                             >
@@ -83,28 +131,69 @@ const StudioSidebar = ({ onSelect, selectedId }: StudioSidebarProps) => {
                                         ? "bg-primary/20 ring-1 ring-primary/50 shadow-[0_0_20px_rgba(var(--primary),0.1)]"
                                         : "bg-accent/50 hover:bg-accent"
                                 )}>
-                                    <CardContent className="p-4 space-y-2">
-                                        <div className="flex items-center justify-between gap-2">
+                                    <CardContent className="p-3.5 space-y-2">
+                                        {/* Status & Options Row */}
+                                        <div className="flex items-center justify-between">
                                             <span className={cn(
-                                                "text-[10px] font-bold uppercase tracking-widest",
-                                                item.is_published ? "text-green-500" : "text-amber-500"
+                                                "text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border",
+                                                item.is_published 
+                                                    ? "text-emerald-400 bg-emerald-950/60 border-emerald-800/50" 
+                                                    : "text-amber-400 bg-amber-950/60 border-amber-800/50"
                                             )}>
                                                 {item.is_published ? "Published" : "Draft"}
                                             </span>
-                                            <div className="flex items-center gap-1 text-[10px] text-muted-foreground font-mono">
-                                                <Calendar className="h-3 w-3" />
-                                                {format(new Date(item.created_at), "MMM d, yyyy")}
+
+                                            <DropdownMenu>
+                                                <DropdownMenuTrigger
+                                                    onClick={(e) => e.stopPropagation()}
+                                                    className="p-1 rounded-md text-muted-foreground hover:text-foreground hover:bg-background/80 transition-colors focus:outline-none"
+                                                >
+                                                    <MoreVertical className="h-4 w-4" />
+                                                </DropdownMenuTrigger>
+                                                <DropdownMenuContent align="end" className="w-40">
+                                                    <DropdownMenuItem
+                                                        onClick={(e) => togglePublishStatus(e, item)}
+                                                        className="cursor-pointer gap-2 text-xs"
+                                                    >
+                                                        {item.is_published ? (
+                                                            <>
+                                                                <Archive className="h-4 w-4 text-amber-500" />
+                                                                Move to Draft
+                                                            </>
+                                                        ) : (
+                                                            <>
+                                                                <Globe className="h-4 w-4 text-green-500" />
+                                                                Publish Article
+                                                            </>
+                                                        )}
+                                                    </DropdownMenuItem>
+                                                    <DropdownMenuSeparator />
+                                                    <DropdownMenuItem
+                                                        onClick={(e) => handleDelete(e, item)}
+                                                        className="cursor-pointer gap-2 text-xs text-red-500 focus:text-red-500"
+                                                    >
+                                                        <Trash2 className="h-4 w-4" />
+                                                        Delete Article
+                                                    </DropdownMenuItem>
+                                                </DropdownMenuContent>
+                                            </DropdownMenu>
+                                        </div>
+
+                                        {/* Title */}
+                                        <h3 className="font-bold text-sm text-foreground line-clamp-2 leading-snug group-hover:text-primary transition-colors">
+                                            {item.title || "Untitled Article"}
+                                        </h3>
+
+                                        {/* Date Footer Badge */}
+                                        <div className="flex items-center justify-between pt-1 text-[11px] text-muted-foreground font-mono">
+                                            <div className="flex items-center gap-1.5 text-foreground/80 bg-background/80 px-2 py-0.5 rounded border border-border/80 font-bold">
+                                                <Calendar className="h-3 w-3 text-primary" />
+                                                <span>{format(new Date(item.created_at), "MMM d, yyyy")}</span>
                                             </div>
                                         </div>
-                                        <h3 className="font-bold text-foreground line-clamp-1 group-hover:text-primary transition-colors">
-                                            {item.title}
-                                        </h3>
-                                        <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed h-[34px]">
-                                            {item.summary || "No summary provided..."}
-                                        </p>
                                     </CardContent>
                                 </Card>
-                            </button>
+                            </div>
                         ))
                     )}
                 </div>
