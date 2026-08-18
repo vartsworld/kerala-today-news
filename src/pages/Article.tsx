@@ -176,7 +176,7 @@ const Article = () => {
           description={articleContent.slice(0, 160)}
           canonical={`/article/${slug}`}
           type="article"
-          image={featuredImage?.thumbnail_url || featuredImage?.url}
+          image={featuredImage?.thumbnail_url || featuredImage?.url || "https://keralatoday.news/lovable-uploads/kerala-today-logo.png"}
           structuredData={{
             "@context": "https://schema.org",
             "@type": "NewsArticle",

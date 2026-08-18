@@ -352,10 +352,20 @@ const EditorialStudio = () => {
                                     </div>
                                     <Textarea
                                         value={title}
-                                        onChange={(e) => setTitle(e.target.value)}
+                                        onChange={(e) => {
+                                            setTitle(e.target.value);
+                                            e.target.style.height = 'auto';
+                                            e.target.style.height = `${e.target.scrollHeight}px`;
+                                        }}
+                                        ref={(el) => {
+                                            if (el) {
+                                                el.style.height = 'auto';
+                                                el.style.height = `${el.scrollHeight}px`;
+                                            }
+                                        }}
                                         placeholder="Enter title..."
                                         rows={1}
-                                        className="text-2xl sm:text-3xl md:text-4xl font-extrabold bg-transparent border-none text-foreground p-0 h-auto min-h-[50px] resize-none focus-visible:ring-0 placeholder:text-muted-foreground/30 leading-snug break-words"
+                                        className="text-2xl sm:text-3xl md:text-4xl font-extrabold bg-transparent border-none text-foreground p-0 min-h-[50px] resize-none focus-visible:ring-0 placeholder:text-muted-foreground/30 leading-snug break-words overflow-hidden"
                                     />
                                     <div className="h-[1px] w-full bg-border" />
                                 </div>
