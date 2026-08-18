@@ -191,8 +191,8 @@ const EditorialStudio = () => {
                         <Sheet>
                             <SheetTrigger asChild>
                                 <Button variant="secondary" size="sm" className="bg-secondary hover:bg-secondary/80 text-secondary-foreground border border-border">
-                                    <Send className="h-4 w-4 sm:mr-2" />
-                                    <span className="hidden sm:inline">Publish</span>
+                                    {isPublished ? <Settings className="h-4 w-4 sm:mr-2" /> : <Send className="h-4 w-4 sm:mr-2" />}
+                                    <span className="hidden sm:inline">{isPublished ? "Settings" : "Publish"}</span>
                                 </Button>
                             </SheetTrigger>
                             <SheetContent className="bg-card border-l border-border text-card-foreground w-full sm:max-w-md overflow-y-auto">
@@ -202,7 +202,7 @@ const EditorialStudio = () => {
                                         Publication Details & Settings
                                     </SheetTitle>
                                     <SheetDescription className="text-xs text-muted-foreground">
-                                        Configure editorial media, excerpt, custom URL slug, and public visibility.
+                                        Configure editorial media, description, custom URL slug, and public visibility.
                                     </SheetDescription>
                                 </SheetHeader>
                                 <div className="py-6 space-y-8">
@@ -229,7 +229,7 @@ const EditorialStudio = () => {
                                         </div>
 
                                         <div className="space-y-2">
-                                            <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Short Excerpt</label>
+                                            <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Short Description</label>
                                             <Textarea
                                                 value={summary}
                                                 onChange={(e) => setSummary(e.target.value)}
