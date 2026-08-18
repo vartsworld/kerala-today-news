@@ -118,7 +118,10 @@ export const SEO = ({
   breadcrumbs,
   noindex = false,
 }: SEOProps) => {
-  const seoImage = image || DEFAULT_IMAGE;
+  const rawImage = image || DEFAULT_IMAGE;
+  const seoImage = rawImage.startsWith("http://") || rawImage.startsWith("https://") 
+    ? rawImage 
+    : `${BASE_URL}${rawImage.startsWith("/") ? "" : "/"}${rawImage}`;
   const fullCanonical = canonical ? `${BASE_URL}${canonical}` : BASE_URL;
   const allKeywords = [...new Set([...MASTER_KEYWORDS, ...keywords])].join(", ");
 

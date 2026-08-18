@@ -150,7 +150,8 @@ const Article = () => {
 
   const articleTitle = article.message?.split('\n')[0]?.slice(0, 120) || 'Facebook Post';
   const articleContent = article.message || '';
-  const featuredImage = article.attachments?.find(a => a.thumbnail_url || a.url);
+  const featuredImage = article.attachments?.find(a => a.url || a.thumbnail_url);
+  const articleImageUrl = featuredImage?.url || featuredImage?.thumbnail_url || undefined;
 
   // Convert related posts to RelatedArticle format
   const relatedArticles: RelatedArticle[] = relatedPosts.map(post => ({
@@ -176,7 +177,7 @@ const Article = () => {
           description={articleContent.slice(0, 160)}
           canonical={`/article/${slug}`}
           type="article"
-          image={featuredImage?.thumbnail_url || featuredImage?.url || "https://keralatoday.news/lovable-uploads/kerala-today-logo.png"}
+          image={articleImageUrl}
           structuredData={{
             "@context": "https://schema.org",
             "@type": "NewsArticle",
